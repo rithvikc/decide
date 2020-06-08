@@ -68,6 +68,7 @@ users.each do |user|
       )
     new_invitation.user = User.find(var + 1)
     new_invitation.event = Event.find(var + 1)
+    p Cuisine.all.sample
     new_invitation.cuisine = Cuisine.all.sample
     new_invitation.save!
     array_num += 1
