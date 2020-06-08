@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-# users
+# Create users
 p "creating 4 users!"
 array_num = 0
 name_array = ["Rithvik", "Lacy", "Jason", "Arie"]
@@ -23,7 +23,7 @@ password = "123456"
      )
 end
 
-# events
+# Create events
 p "creating 4 events!"
 array_num = 0
 event_name_array = ["Rithvik's cray party", "Lacy's big night out", , "Jason's daughters birthday", "Arie's post lockdown feed"]
@@ -40,7 +40,7 @@ event_time = 1000000000
   event_time += 1000000000
 end
 
-# cuisines
+# Create cuisines
 p "creating 4 cuisines!"
 array_num = 0
 cuisines_array = ["Pizza", "Burgers", "Chinese", "Mexican"]
@@ -51,7 +51,7 @@ cuisines_array = ["Pizza", "Burgers", "Chinese", "Mexican"]
   array_num += 1
 end
 
-# invitations
+# Create invitations
 p "creating 4 invitations per user"
 location_array = ["122 Albert St, Port Melbourne, VIC 3207", "99 Beacon Rd, Port Melbourne, VIC 3207", "396 Clarendon St, South Melbourne, VIC 3205", "120 Princes St, Port Melbourne, VIC"]
 var = 0
@@ -72,8 +72,13 @@ users.each do |user|
   var += 1
 end
 
-# invitations
-p "creating 4 "
+#
+p "creating 4 cuisine events"
+
+4.times do
+  new_cuisine_event = Cuisine_event.new
+
+end
 
 
 
