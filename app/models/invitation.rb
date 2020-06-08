@@ -1,5 +1,6 @@
 class Invitation < ApplicationRecord
   belongs_to :user
   belongs_to :event
-  belongs_to :cuisine
+  # belongs_to :cuisine
+  has_many :cuisines
 end
