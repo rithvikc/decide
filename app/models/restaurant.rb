@@ -1,4 +1,4 @@
 class Restaurant < ApplicationRecord
-  belongs_to :results, dependent: :destroy
+  has_one :result, dependent: :destroy
   has_one :event, through: :results
 end

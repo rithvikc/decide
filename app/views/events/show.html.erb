@@ -4,11 +4,13 @@
 
 <p><%= link_to "Create invitation here", new_event_invitation_path(@event) %></p>
 
+<%= button_to "Create Result!", event_results_path(@event), class: "btn btn-primary", method: :post %>
+
 <ul>
   <% @event.invitations.each do |i|%>
-     <li><%= i.user.email %></li>
+   <li><%= i.user.email %></li>
   <% end  %>
- </ul>
+</ul>
 
 <ul><strong>Cuisines</strong>
   <% @event.cuisine_events.each do |cuisine_event|%>
