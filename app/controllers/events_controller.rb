@@ -8,13 +8,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params.except(:cuisine_event_ids))
-    @cuisine = Cuisine.find(cuisine_event_params(event_params))
-    @cuisine_event = CuisineEvent.new
-    @cuisine_event.cuisine = @cuisine
-
     if @event.save
-      @cuisine_event.event = @event
-      @cuisine_event.save!
+      cuisine_event_params(event_params)
+    # @save_count == event_params[:cuisine_event_ids].count
       redirect_to event_path(@event)
     else
       render :new
@@ -26,8 +22,15 @@ class EventsController < ApplicationController
   private
 
   def cuisine_event_params(event_params)
-    # refactor for multiple ID's each
-    event_params[:cuisine_event_ids][1].to_i
+    @save_count = 0
+    event_params[:cuisine_event_ids].each do |id|
+        @cuisine_event = CuisineEvent.new
+        @cuisine = Cuisine.find(id.to_i)
+        @cuisine_event.cuisine = @cuisine
+        @cuisine_event.event = @event
+        @cuisine_event.save!
+        @save_count += 1
+    end
   end
 
   def set_event
@@ -37,5 +40,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :description, :start_at, cuisine_event_ids: [])
   end
-
 end
