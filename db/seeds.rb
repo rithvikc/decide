@@ -22,6 +22,7 @@ password = "123456"
     password: password,
     avatar: "https://kitt.lewagon.com/placeholder/users/random"
      )
+    p 'user created'
     new_user.save!
   array_num += 1
 end
