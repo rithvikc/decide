@@ -32,3 +32,9 @@ document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
 });
+
+import { initAutocomplete } from '../plugins/init_autocomplete';
+
+document.addEventListener('turbolinks:load', () => {
+  initAutocomplete();
+})
