@@ -1,18 +1,19 @@
 class InvitationsController < ApplicationController
-before_action :set_invitation, only: [:show]
+   # before_action :set_invitation, only: [:new, :show]
 
   def new
+    @event = Event.find(params[:event_id])
     @invitation = Invitation.new
   end
 
   def create
-    @invitation = Invitation.new(invitation_params)
-    if @invitation.save
-      redirect_to invitation_path(@invitation)
-    else
-      render :new
-    end
-
+    # @event = Event.find(params[:event_id])
+    # @invitation = Invitation.new(invitation_params)
+    # if @invitation.save
+    #   redirect_to event_path(@invitation[:event_id])
+    # else
+    #   render :new
+    # end
   end
 
   def show; end
@@ -20,13 +21,11 @@ before_action :set_invitation, only: [:show]
   private
 
   def set_invitation
+    @event = Event.find(params[:event_id])
     @invitation = Invitation.find(params[:id])
   end
 
   def invitation_params
-    params.require(:invitation).permit(:name, :description, :start_at)
+    params.require(:invitation).permit(:location)
   end
-
-
-
 end
