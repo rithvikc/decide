@@ -1,0 +1,12 @@
+<h1>Create an invitation</h1>
+
+<%= simple_form_for [@event, @invitation] do |f| %>
+    <div class="form-inputs">
+      <%= f.input :location %>
+    </div>
+
+    <div class="form-actions">
+        <%= f.button :submit, class:'btn btn-outline-dark dp-border-radius mb-3'%>
+    </div>
+<% end %>
+
