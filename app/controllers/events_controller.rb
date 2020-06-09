@@ -37,5 +37,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :description, :start_at, cuisine_event_ids: [])
   end
-
 end
