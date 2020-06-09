@@ -57,7 +57,7 @@ class ResultsController < ApplicationController
   end
 
   def average_geo_location(coords)
-    coords[0] if coords.length == 1
+    return coords[0] if coords.length == 1
     x = 0.0
     y = 0.0
     z = 0.0
@@ -85,5 +85,6 @@ class ResultsController < ApplicationController
   end
 
   def restaurant_params
+
   end
 end
