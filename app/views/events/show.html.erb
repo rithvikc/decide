@@ -2,4 +2,10 @@
 <p><%= @event.description %></p>
 <p><%= @event.start_at %></p>
 
-<p>Create invitation here</p>
+<p><%= link_to "Create invitation here", new_event_invitation_path(@event) %></p>
+
+<ul>
+  <% @event.invitations.each do |i|%>
+     <li><%= i.user.email %></li>
+  <% end  %>
+ </ul>
