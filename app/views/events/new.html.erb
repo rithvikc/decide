@@ -5,7 +5,7 @@
       <%= f.input :name %>
       <%= f.input :description %>
       <%= f.input :start_at, as: :datetime, html5: true, input_html: {min: Date.today} %>
-      <%= f.association :cuisine_events, as: :select, collection: Cuisine.all %>
+      <%= f.association :cuisine_events, as: :select, collection: Cuisine.all, input_html: { multiple: true }, include_hidden: false %>
     </div>
 
     <div class="form-actions">
