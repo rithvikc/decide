@@ -1,5 +1,5 @@
 class Cuisine < ApplicationRecord
   has_many :invitations
-  has_one :cuisine_event
-  has_one :event, through: :events
+  has_many :cuisine_events
+  has_many :events, through: :cuisine_events
 end

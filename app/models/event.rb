@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   has_many :users, through: :invitations
   has_one :result
   has_one :restaurant, through: :results
-  has_one :cuisine_event
-  has_one :cuisine, through: :cuisine_events
+  has_many :cuisine_events
+  has_many :cuisines, through: :cuisine_events
+
+  validates :name, :start_at, presence: true
 end
