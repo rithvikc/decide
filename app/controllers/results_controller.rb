@@ -23,14 +23,14 @@ class ResultsController < ApplicationController
     @event.invitations.each do |i|
       cuisine_array << i.cuisine.name
     end
-    @most_frequent_cuisine = cuisine_array.max_by {|i| cuisine_array.count(i)}
+    @most_frequent_cuisine = cuisine_array.max_by { |i| cuisine_array.count(i) }
   end
 
   def yelp_location_logic
     # accept an an array of hashes of user co-ordinates and return the geographical center
     coords_array = []
     @event.invitations.each do |i|
-      coords_array << {latitude: i.latitude, longitude: i.longitude}
+      coords_array << { latitude: i.latitude, longitude: i.longitude }
     end
     @geo_center = average_geo_location(coords_array)
     # raise
@@ -57,7 +57,8 @@ class ResultsController < ApplicationController
   end
 
   def average_geo_location(coords)
-    coords[0] if coords.length == 1
+    return coords[0] if coords.length == 1
+
     x = 0.0
     y = 0.0
     z = 0.0
