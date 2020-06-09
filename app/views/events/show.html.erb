@@ -2,11 +2,16 @@
 <p><%= @event.description %></p>
 <p><%= @event.start_at %></p>
 
+<p><%= link_to "Create invitation here", new_event_invitation_path(@event) %></p>
+
+<ul>
+  <% @event.invitations.each do |i|%>
+     <li><%= i.user.email %></li>
+  <% end  %>
+ </ul>
+
 <ul><strong>Cuisines</strong>
   <% @event.cuisine_events.each do |cuisine_event|%>
   <li><%= cuisine_event.cuisine.name %></li>
   <% end %>
 </ul>
-
-
-<p>Create invitation here</p>
