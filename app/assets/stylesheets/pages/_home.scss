@@ -1,1 +1,39 @@
 // Specific CSS for your home-page
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.jumbotron {
+  font-family: 'Montserrat', sans-serif;
+  padding: 150px 0;
+  background-color: #A8D0E6;
+  background-size: cover;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+
+.jumbotron h1 {
+  font-size: 70px;
+  margin-bottom: 0;
+}
+
+.jumbotron p {
+  font-size: 20px;
+  margin: 0 0 30px;
+}
+
+.button {
+  display: inline-block;
+  border: 2px solid #fff;
+  padding: 10px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.button:hover {
+  background: #fff;
+  color: #000;
+}
