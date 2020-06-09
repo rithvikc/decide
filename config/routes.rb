@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   resources :events, only: [:new, :create, :show] do
     resources :invitations, only: [:new, :create, :show]
     resources :cuisine_events, only: [:create]
-    resources :results, only: [:create, :show]
+    resources :results, only: [:new, :create, :show]
   end
 end
