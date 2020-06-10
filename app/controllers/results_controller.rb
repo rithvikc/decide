@@ -10,6 +10,7 @@ class ResultsController < ApplicationController
     @result.restaurant = @restaurant
     @result.event = @event
     @result.save!
+    raise
     redirect_to event_result_path[@event, @result]
   end
 
