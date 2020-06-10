@@ -33,8 +33,8 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
 });
 
-import { initAutocomplete } from '../plugins/init_autocomplete';
+import { initPlaces } from '../plugins/init_gplaces_widget';
 
 document.addEventListener('turbolinks:load', () => {
-  initAutocomplete();
+  initPlaces();
 })

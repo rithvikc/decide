@@ -17,7 +17,9 @@ class EventsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @invitation = Invitation.new
+  end
 
   private
 
