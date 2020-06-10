@@ -11,6 +11,7 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     @event = Event.find(params[:event_id])
+    @event_time = @event.start_at
     yelp_cuisine_logic
     yelp_location_logic
     yelp_api_call(@geo_center, @most_frequent_cuisine)
@@ -70,11 +71,10 @@ class ResultsController < ApplicationController
   def yelp_api_call(geo_center, most_frequent_cuisine)
     # calls api with results of yelp_cuisine_logic and yelp_location
     # example url = https://api.yelp.com/v3/businesses/search?term=thai,restaurants&latitude=37.786882&longitude=-122.399972
-    url = URI("https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine},restaurants&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}")
-    https = Net::HTTP.new(url.host, url.port);
+    url = URI("https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine},restaurants&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}&radius=500&atrributes=hot_and_new")
+    https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
     request = Net::HTTP::Get.new(url)
-    key = ENV["YELP_KEY"]
     request["Authorization"] = ENV["YELP_KEY"]
     response = https.request(request)
     yelp_json = JSON.parse(response.read_body)
