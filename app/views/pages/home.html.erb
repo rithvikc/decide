@@ -1,54 +1,6 @@
-
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "/", class: "navbar-brand" do %>
-      <%= image_tag "https://res.cloudinary.com/rithvik/image/upload/v1591708486/thedecision_4_cprb8b.png" %>
-  <% end %>
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-      <li class="nav-item active">
-        <%= link_to "Home", "/", class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <%= link_to "Events", events_path, class: "nav-link" %>
-      </li>
-      <li class="nav-item dropdown">
-        <% if current_user.avatar.attached? %>
-            <%= cl_image_tag current_user.avatar.key, height: 40, width: 40, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <% else %>
-            <%= image_tag "https://www.dropbox.com/s/6uwz7n1iep1indv/elon_musk_royal_society.jpg?raw=1", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-          <% end %>
-            <div class="dropdown-menu home dropdown-menu-right" aria-labelledby="navbarDropdown">
-              <%= link_to "Dashboard", "/dashboard", class: "dropdown-item" %>
-              <%= link_to "Add an event", new_event_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-            </div>
-      </li>
-      <% else %>
-        <li class="nav-item active">
-            <%= link_to "About", "/about", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-      <% end %>
-    </ul>
-  </div>
-
-</div>
-
 <section class="jumbotron">
   <h1><%= image_tag "https://res.cloudinary.com/rithvik/image/upload/v1591708545/thedecision_5_uprpsf.png" %></h1>
   <p>Cure Decision Fatigue</p>
 
     <%= link_to "make some plans already!", new_event_path, class: "button" %>
 </section>
-
-</div>
-
