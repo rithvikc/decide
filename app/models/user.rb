@@ -5,6 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :invitations
   has_many :events, through: :invitations
-  has_one_attached :avatar
-  validates :name, presence: true
 end
