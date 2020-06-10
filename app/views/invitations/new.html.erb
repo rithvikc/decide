@@ -1,13 +1,28 @@
 <h1>Create an invitation</h1>
+<br>
+<h5>Invite Friends</h5>
+<div class="input-group" id="friends-form">
+  <input type="text" id="friend-email" class="form-control" placeholder="Friend's email address">
+  <div class="input-group-append">
+    <input value="Add friend" class="btn btn-outline-secondary js-add-friend-btn" type="submit">
+  </div>
+</div>
+
+<div class="list-friends">
+
+</div>
+<br>
 
 <%= simple_form_for [@event, @invitation] do |f| %>
     <div class="form-inputs">
       <%= f.input :location, input_html: {id:"location"} %>
       <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false %>
     </div>
-
+    <textarea class="js-friends-value"></textarea>
     <div class="form-actions">
         <%= f.button :submit, class:'btn btn-outline-dark dp-border-radius mb-3'%>
     </div>
 <% end %>
 
+<!-- <script src="/./javascript/invitations/invite_friends.js"></script> -->
+<%= javascript_pack_tag 'pages/new_invitation' %>
