@@ -1,12 +1,16 @@
 class ResultsController < ApplicationController
-  include Enumerable
+    require 'json'
+    require 'open-uri'
+
+    # require 'net/http'
 
   def create
     @result = Result.new(result_params)
     @event = Event.find(params[:event_id])
-    @restaurant = Restaurant.find(1)
     yelp_cuisine_logic
     yelp_location_logic
+    yelp_api_call(@geo_center, @most_frequent_cuisine)
+    @restaurant = Restaurant.find(1)
     @result.restaurant = @restaurant
     @result.event = @event
     @result.save!
@@ -37,14 +41,12 @@ class ResultsController < ApplicationController
     # raise
   end
 
-  def yelp_api_call
+  def yelp_api_call(geo_center, most_frequent_cuisine)
     # calls api with results of yelp_cuisine_logic and yelp_location
-    #   require 'open-uri'
-    #   require 'json'
-    #   require 'net/http'
-    #   # require 'openssl'
-    #   api_url = "https://api.yelp.com/v3/businesses/search"
+    # example url = https://api.yelp.com/v3/businesses/search?term=thai,restaurants&latitude=37.786882&longitude=-122.399972
+    api_url = "https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine},restaurants&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}"
 
+    open api_url
     #   http = Net::HTTP.new(url.host, url.port)
     #   http.use_ssl = true
     #   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
