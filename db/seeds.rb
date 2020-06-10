@@ -1,12 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+p "Cleaning database...."
+Restaurant.destroy_all
+Invitation.destroy_all
+Event.destroy_all
+Cuisine.destroy_all
+User.destroy_all
+Result.destroy_all
 
-
+p "The database is empty"
+p "404 DREAM TEAM!"
 # Create users
 p "creating 4 users!"
 array_num = 0
@@ -21,6 +22,9 @@ password = "123456"
     password: password,
     avatar: "https://kitt.lewagon.com/placeholder/users/random"
      )
+    p 'user created'
+    new_user.save!
+  array_num += 1
 end
 p "success!"
 
@@ -54,6 +58,18 @@ cuisines_array = ["Pizza", "Burgers", "Chinese", "Mexican"]
 end
 p "success!"
 
+# Cuisene events
+# p "creating 4 cuisine events!"
+# array_num = 1
+# 4.times do
+#   new_cuisine_event = CuisineEvent.new
+#   new_cuisine_event.event = Event.find(array_num)
+#   new_cuisine_event.cuisine = Cuisine.find(array_num)
+#   new_cuisine_event.save!
+#   array_num += 1
+# end
+# p "success!"
+
 # Create invitations
 p "creating 4 invitations per user"
 location_array = ["122 Albert St, Port Melbourne, VIC 3207", "99 Beacon Rd, Port Melbourne, VIC 3207", "396 Clarendon St, South Melbourne, VIC 3205", "120 Princes St, Port Melbourne, VIC"]
@@ -68,7 +84,6 @@ users.each do |user|
       )
     new_invitation.user = User.find(var + 1)
     new_invitation.event = Event.find(var + 1)
-    p Cuisine.all.sample
     new_invitation.cuisine = Cuisine.all.sample
     new_invitation.save!
     array_num += 1
@@ -76,6 +91,46 @@ users.each do |user|
   var += 1
 end
 p "success!"
+
+p "creating 4 results"
+var = 1
+
+p "creating 4 restaurants"
+yelp_id_array = ["italia-39-pizzeria-and-degustation-melbourne", "11-inch-pizza-melbourne", "jing-jai-thai-melbourne", "China Chilli"]
+rest_name_array = ["Italia +39 Pizzeria & Degustation", "11 Inch Pizza", "Jing Jai Thai", "China Chilli"]
+rest_desc_array = ["Pizza", "Pizza", "Thai", "Szechuan, Specialty Food"]
+rest_location_array = ["362 Lt Bourke St, Melbourne Victoria 3000, Australia", "5B/353-359 Lt Collins St, Melbourne Victoria 3000, Australia", "271-273 Flinders Lane, Melbourne Victoria 3000, Australia", "206 Bourke St, Melbourne Victoria 3000, Australia"]
+var = 0
+
+4.times do
+  new_restaurant = Restaurant.new(
+    yelp_id: yelp_id_array[var],
+    name: rest_name_array[var],
+    description: rest_desc_array[var],
+    location: location_array[var])
+  new_restaurant.save!
+  var += 1
+end
+p "success!"
+
+p "Creating 4 results"
+var = 1
+
+4.times do
+  new_result = Result.new
+  event = Event.find(var)
+  new_result.event = event
+  new_result.restaurant = Restaurant.find(var)
+  new_result.save!
+  var += 1
+end
+p "success!"
+p "Let's go DREAM TEAM!"
+
+
+
+
+
 
 #
 # p "creating 4 cuisine events"

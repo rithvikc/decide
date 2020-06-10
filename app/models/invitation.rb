@@ -4,4 +4,6 @@ class Invitation < ApplicationRecord
   belongs_to :cuisine
   # has_one :cuisine
   # problem here in belongs_to :cuisine
+  geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
 end
