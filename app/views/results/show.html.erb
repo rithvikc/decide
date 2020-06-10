@@ -3,6 +3,7 @@
 <p>Name: <%= @result.restaurant.name %></p>
 <p>Description: <%= @result.restaurant.description %></p>
 <p>Location: <%= @result.restaurant.location %></p>
+<p>Rating: <%= @result.restaurant.rating %></p>
 
 <div class="card" style="width: 32rem;">
   <img class="card-img-top" src="..." alt="Card image cap">
@@ -13,7 +14,7 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><%= @result.restaurant.description %></li>
     <li class="list-group-item"><%= @result.restaurant.location %></li>
-    <li class="list-group-item">Vestibulum at eros</li>
+    <li class="list-group-item">Rating:<%= @result.restaurant.rating %></li>
   </ul>
   <div class="card-body">
     <a href="#" class="card-link">Card link</a>

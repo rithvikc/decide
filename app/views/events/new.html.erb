@@ -4,6 +4,12 @@
     <div class="form-inputs">
       <%= f.input :name %>
       <%= f.input :description %>
+
+      <%= f.simple_fields_for :invitations do |w| %>
+
+        <%= w.input :location, input_html: {id:"location"} %>
+
+      <% end %>
       <%= f.input :start_at, as: :datetime, html5: true, input_html: {min: Date.today} %>
       <%= f.association :cuisine_events, as: :check_boxes, collection: Cuisine.all, input_html: { multiple: true }, include_hidden: false %>
     </div>

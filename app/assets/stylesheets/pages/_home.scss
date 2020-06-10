@@ -31,9 +31,16 @@ html, body {
   color: #fff;
   text-decoration: none;
   transition: 0.3s;
+  margin-top: 1rem;
 }
 
 .button:hover {
   background: #fff;
   color: #000;
 }
+
+.btn-group-vertical a, .btn-group-vertical button {
+  width: 100%;
+}
+
+
