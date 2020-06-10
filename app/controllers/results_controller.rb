@@ -74,7 +74,8 @@ class ResultsController < ApplicationController
     https = Net::HTTP.new(url.host, url.port);
     https.use_ssl = true
     request = Net::HTTP::Get.new(url)
-    request["Authorization"] = "Bearer 0eoTVzdis_WbzSGCNE0TBaeJor2a1KrwGMxb9CMO4Zw1gXrStUQpSPcIEPESKF2sKb_34e6h4LRV4dV85HrFRcadAJGMYlkZl4QVUi8zNCNIT7EeVy0LDnaP1GzdXnYx"
+    key = ENV["YELP_KEY"]
+    request["Authorization"] = ENV["YELP_KEY"]
     response = https.request(request)
     yelp_json = JSON.parse(response.read_body)
     create_restaurant(yelp_json["businesses"].first)
