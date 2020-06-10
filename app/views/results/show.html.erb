@@ -1,0 +1,22 @@
+<h1>Result!</h1>
+<p>Yelp ID:<%= @result.restaurant.yelp_id %></p>
+<p>Name: <%= @result.restaurant.name %></p>
+<p>Description: <%= @result.restaurant.description %></p>
+<p>Location: <%= @result.restaurant.location %></p>
+
+<div class="card" style="width: 32rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Name:</h5>
+    <p class="card-text"><%= @result.restaurant.name %></p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><%= @result.restaurant.description %></li>
+    <li class="list-group-item"><%= @result.restaurant.location %></li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+  <div class="card-body">
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>

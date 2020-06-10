@@ -82,18 +82,16 @@ users.each do |user|
       status: ["Pending", "Accepted", "Rejected"].sample,
       location: location_array[var]
       )
-    new_invitation.user = User.find(var + 1)
-    new_invitation.event = Event.find(var + 1)
+    new_invitation.user = User.find(user.id)
+    new_invitation.event = Event.find(array_num + 1)
     new_invitation.cuisine = Cuisine.all.sample
     new_invitation.save!
     array_num += 1
   end
+  array_num = 0
   var += 1
 end
 p "success!"
-
-p "creating 4 results"
-var = 1
 
 p "creating 4 restaurants"
 yelp_id_array = ["italia-39-pizzeria-and-degustation-melbourne", "11-inch-pizza-melbourne", "jing-jai-thai-melbourne", "China Chilli"]
