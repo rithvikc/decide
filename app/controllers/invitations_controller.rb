@@ -12,7 +12,7 @@ class InvitationsController < ApplicationController
     @user = current_user
     @invitation.user = @user
     @invitation.event = @event
-    if @invitation.save!
+    if @invitation.save
       redirect_to event_path(@invitation[:event_id])
     else
       render :new

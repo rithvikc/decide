@@ -14,6 +14,4 @@ Rails.application.routes.draw do
     resources :cuisine_events, only: [:create]
     resources :results, only: [:new, :create, :show]
   end
-
-  # resources :users, only: :show
 end

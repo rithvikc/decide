@@ -23,12 +23,14 @@
           <%= link_to "Manage", "/dashboard", class: "dropdown-item" %>
           <%= link_to "Action", "#", class: "dropdown-item" %>
           <%= link_to "Another action", "#", class: "dropdown-item" %>
+
           <%= link_to "Create New Event", new_event_path, class: "dropdown-item" %>
           <% if user_signed_in? %>
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             <% else %>
             <%= link_to "Log in", new_user_session_path, class: "dropdown-item" %>
           <% end %>
+
 
         </div>
       </li>

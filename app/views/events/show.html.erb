@@ -1,14 +1,26 @@
-
-<h1><%= @event.name %></h1>
-<p><%= @event.description %></p>
-<p><%= @event.start_at %></p>
+<div class="container d-flex">
+  <div>
+    <h1><%= @event.name %></h1>
+    <p><%= @event.description %></p>
+    <p><%= @event.start_at %></p>
+  </div>
+  <table class="table dp-border-radius">
+        <tr>
+          <th>Guest Email</th>
+          <th>Located in</th>
+          <th>Chosen</th>
+        </tr>
+        <% @event.invitations.each do | invitation|%>
+          <tr>
+            <td><%= invitation.user.email %></td>
+            <td><%= invitation.location %></td>
+            <td><%= invitation.cuisine.name %></td>
+          </tr>
+        <% end %>
+  </table>
+</div>
 
 <%= link_to "Create invitation here", new_event_invitation_path(@event), class: "btn btn-primary" %>
 <br>
 <%= button_to "Create Result!", event_results_path(@event), class: "btn btn-primary", method: :post %>
 
-<ul>
-  <% @event.invitations.each do |i|%>
-   <li><%= i.user.email %> <%= i.cuisine.name %></li>
-  <% end  %>
-</ul>
