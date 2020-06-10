@@ -71,8 +71,7 @@ class ResultsController < ApplicationController
   def yelp_api_call(geo_center, most_frequent_cuisine)
     # calls api with results of yelp_cuisine_logic and yelp_location
     # example url = https://api.yelp.com/v3/businesses/search?term=thai,restaurants&latitude=37.786882&longitude=-122.399972
-    url = URI("https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine}&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}&radius=1000")
-    # raise
+    url = URI("https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine}&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}&radius=5000")
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
     request = Net::HTTP::Get.new(url)
@@ -82,12 +81,24 @@ class ResultsController < ApplicationController
     create_restaurant(yelp_json["businesses"].first)
   end
 
+  def zomato_api_call(geo_center, cuisine)
+    url = URI("https://developers.zomato.com/api/v2.1/search?q=#{cuisine}&lat=#{geo_center[:latitude]}&lon=#{geo_center[:longitude]}&radius=1000&sort=real_distance")
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    request["user-key"] = ENV["ZOMATO_KEY"]
+    response = https.request(request)
+    zomato_json = JSON.parse(response.read_body)
+    create_restaurant(zomato_json["restaurants"]["name"].first)
+  end
+
   def create_restaurant(hash)
     new_restaurant = Restaurant.new(
       yelp_id: hash["id"],
       name: hash["name"],
       description: hash["categories"][0]["title"],
-      location: hash["location"]["display_address"].first
+      location: hash["location"]["display_address"].first,
+      rating: hash["rating"]
     )
     new_restaurant.save!
   end

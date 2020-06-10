@@ -4,6 +4,11 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @cuisine_event = CuisineEvent.new
+    @event.invitations.build
+  end
+
+  def index
+    @events = Event.all
   end
 
   def create
@@ -40,6 +45,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :description, :start_at, cuisine_event_ids: [])
+    params.require(:event).permit(:name, :description, :start_at, cuisine_event_ids: [] )
   end
 end
