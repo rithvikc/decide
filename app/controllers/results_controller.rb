@@ -1,8 +1,12 @@
 class ResultsController < ApplicationController
-    require 'json'
-    require 'open-uri'
+  require 'json'
+  require 'open-uri'
+  require "uri"
+  require 'net/http'
 
-    # require 'net/http'
+  def show
+    @result = Result.find(params[:id])
+  end
 
   def create
     @result = Result.new(result_params)
@@ -10,12 +14,11 @@ class ResultsController < ApplicationController
     yelp_cuisine_logic
     yelp_location_logic
     yelp_api_call(@geo_center, @most_frequent_cuisine)
-    @restaurant = Restaurant.find(1)
+    @restaurant = Restaurant.last
     @result.restaurant = @restaurant
     @result.event = @event
     @result.save!
-    raise
-    redirect_to event_result_path[@event, @result]
+    redirect_to event_result_path(@event, @result)
   end
 
   def restaurant_create
@@ -41,26 +44,9 @@ class ResultsController < ApplicationController
     # raise
   end
 
-  def yelp_api_call(geo_center, most_frequent_cuisine)
-    # calls api with results of yelp_cuisine_logic and yelp_location
-    # example url = https://api.yelp.com/v3/businesses/search?term=thai,restaurants&latitude=37.786882&longitude=-122.399972
-    api_url = "https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine},restaurants&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}"
-
-    open api_url
-    #   http = Net::HTTP.new(url.host, url.port)
-    #   http.use_ssl = true
-    #   http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-    #   request = Net::HTTP::Post.new(url)
-    #   request["x-rapidapi-key"] = '37445f6bdcmshf761d925b5f4361p1582ffjsn49d8d7c2766a'
-
-    #   response = http.request(request)
-    #   puts response.read_body
-    # end
-  end
-
   def average_geo_location(coords)
     return coords[0] if coords.length == 1
+
     x = 0.0
     y = 0.0
     z = 0.0
@@ -81,13 +67,32 @@ class ResultsController < ApplicationController
     { latitude: central_latitude * 180 / Math::PI, longitude: central_longitude * 180 / Math::PI }
   end
 
+  def yelp_api_call(geo_center, most_frequent_cuisine)
+    # calls api with results of yelp_cuisine_logic and yelp_location
+    # example url = https://api.yelp.com/v3/businesses/search?term=thai,restaurants&latitude=37.786882&longitude=-122.399972
+    url = URI("https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine},restaurants&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}")
+    https = Net::HTTP.new(url.host, url.port);
+    https.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    request["Authorization"] = "Bearer 0eoTVzdis_WbzSGCNE0TBaeJor2a1KrwGMxb9CMO4Zw1gXrStUQpSPcIEPESKF2sKb_34e6h4LRV4dV85HrFRcadAJGMYlkZl4QVUi8zNCNIT7EeVy0LDnaP1GzdXnYx"
+    response = https.request(request)
+    yelp_json = JSON.parse(response.read_body)
+    create_restaurant(yelp_json["businesses"].first)
+  end
+
+  def create_restaurant(hash)
+    new_restaurant = Restaurant.new(
+      yelp_id: hash["id"],
+      name: hash["name"],
+      description: hash["categories"][0]["title"],
+      location: hash["location"]["display_address"].first
+    )
+    new_restaurant.save!
+  end
+
   private
 
   def result_params
     params.permit(:event_id)
-  end
-
-  def restaurant_params
-
   end
 end
