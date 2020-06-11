@@ -80,7 +80,7 @@ class ResultsController < ApplicationController
 
   def yelp_results(lat, long, food)
     radius = 2000
-    fail_block = "22221231231212512"
+    # fail_block = "22221231231212512"
     # url = URI("https://api.yelp.com/v3/businesses/search?term=#{food}&latitude=#{lat}&longitude=#{long}&radius=#{radius}&open_at=#{time}")
     url = URI("https://api.yelp.com/v3/businesses/search?term=#{food}&latitude=#{lat}&longitude=#{long}&radius=#{radius}")
     api_key = ENV["YELP_KEY"]
@@ -91,6 +91,7 @@ class ResultsController < ApplicationController
   end
 
   def sort_yelp_results(json, radius)
+    raise
     json.map do |j|
       decide_rating = j["rating"] * (radius - j["distance"])
       j["decide_rating"] = decide_rating
@@ -118,7 +119,7 @@ class ResultsController < ApplicationController
       description: hash["categories"][0]["title"],
       location: hash[
         "location"]["display_address"].join(", "),
-      rating: hash["rating"]
+      ratings: hash["rating"]
     )
     new_restaurant.save!
   end
@@ -130,7 +131,7 @@ class ResultsController < ApplicationController
       description: hash["categories"][0]["title"],
       location: hash[
         "location"]["display_address"].join(", "),
-      rating: hash["rating"]
+      ratinsg: hash["rating"]
     )
     new_restaurant.save!
   end

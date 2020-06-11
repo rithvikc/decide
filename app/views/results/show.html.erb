@@ -3,7 +3,7 @@
 <p>Name: <%= @result.restaurant.name %></p>
 <p>Description: <%= @result.restaurant.description %></p>
 <p>Location: <%= @result.restaurant.location %></p>
-<p>Rating: <%= @result.restaurant.rating %></p>
+<p>Rating: <%= @result.restaurant.ratings %></p>
 
 <p>Note: card below should be a rendered partial :)</p>
 
@@ -16,7 +16,7 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item"><%= @result.restaurant.description %></li>
     <li class="list-group-item"><%= @result.restaurant.location %></li>
-    <li class="list-group-item">Rating:<%= @result.restaurant.rating %></li>
+    <li class="list-group-item">Rating:<%= @result.restaurant.ratings %></li>
   </ul>
   <div class="card-body">
     <a href="#" class="card-link">Card link</a>
