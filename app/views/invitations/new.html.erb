@@ -1,17 +1,6 @@
 <h1>Create an invitation</h1>
 <br>
-<h5>Invite Friends</h5>
-<div class="input-group" id="friends-form">
-  <input type="text" id="friend-email" class="form-control" placeholder="Friend's email address">
-  <div class="input-group-append">
-    <input value="Add friend" class="btn btn-outline-secondary js-add-friend-btn" type="submit">
-  </div>
-</div>
 
-<div class="list-friends">
-
-</div>
-<br>
 
 <%= simple_form_for [@event, @invitation] do |f| %>
     <div class="form-inputs">
@@ -24,5 +13,4 @@
     </div>
 <% end %>
 
-<!-- <script src="/./javascript/invitations/invite_friends.js"></script> -->
-<%= javascript_pack_tag 'pages/new_invitation' %>
+
