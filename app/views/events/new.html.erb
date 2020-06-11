@@ -10,7 +10,7 @@
         <%= w.input :location, input_html: {id:"location"} %>
 
       <% end %>
-      <%= f.input :start_at, as: :datetime, html5: true, input_html: {min: Date.today} %>
+      <%= f.input :start_at, as: :datetime, html5: true, input_html: {class: "datepicker"} %>
       <%= f.association :cuisine_events, as: :check_boxes, collection: Cuisine.all, input_html: { multiple: true }, include_hidden: false %>
     </div>
 

@@ -24,7 +24,7 @@ require("channels")
 
 // External imports
 import "bootstrap";
-
+import "../plugins/flatpickr"
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
@@ -38,3 +38,4 @@ import { initPlaces } from '../plugins/init_gplaces_widget';
 document.addEventListener('turbolinks:load', () => {
   initPlaces();
 })
+
