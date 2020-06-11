@@ -91,7 +91,6 @@ class ResultsController < ApplicationController
   end
 
   def sort_yelp_results(json, radius)
-    raise
     json.map do |j|
       decide_rating = j["rating"] * (radius - j["distance"])
       j["decide_rating"] = decide_rating
