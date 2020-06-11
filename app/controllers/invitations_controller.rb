@@ -25,7 +25,8 @@ class InvitationsController < ApplicationController
 
   def set_invitation
     @event = Event.find(params[:event_id])
-    @invitation = Invitation.find(params[:id])
+    @invitation = Invitation.new
+    # @invitation = Invitation.find(params[:id])
   end
 
   def invitation_params

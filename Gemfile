@@ -34,6 +34,7 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cloudinary', '~> 1.12.0'
+gem 'devise_invitable', '~> 2.0.0'
 
 group :development, :test do
   gem 'pry-byebug'
