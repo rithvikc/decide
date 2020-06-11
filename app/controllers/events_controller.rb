@@ -47,4 +47,9 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :description, :start_at, cuisine_event_ids: [])
   end
+
+  def create_invitations
+    @event = Event.find(params[:id])
+    @invitation = Invitation.new
+  end
 end
