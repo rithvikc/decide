@@ -11,10 +11,13 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     @event = Event.find(params[:event_id])
-    @event_time = @event.start_at
-    yelp_cuisine_logic
-    yelp_location_logic
-    yelp_api_call(@geo_center, @most_frequent_cuisine)
+    start_at = @event.start_at.to_i
+    geo_center = find_geo_center(@event)
+    lat = geo_center[:latitude]
+    long = geo_center[:longitude]
+    # unix_start_at_with_timezone = set_timezone(lat, long, start_at)
+    top_cuisine = find_top_cuisine(@event)
+    yelp_results(lat, long, top_cuisine)
     @restaurant = Restaurant.last
     @result.restaurant = @restaurant
     @result.event = @event
@@ -22,27 +25,34 @@ class ResultsController < ApplicationController
     redirect_to event_result_path(@event, @result)
   end
 
+  def set_timezone(lat, long, start_at)
+    url = URI("https://maps.googleapis.com/maps/api/timezone/json?location=#{lat},#{long}&timestamp=#{start_at}&key=#{ENV['GPLACES_KEY']}")
+    api_key = "" # Placed in above URL
+    response = api_call(url, api_key)
+    hash = parse(response)
+    (start_at + hash["dstOffset"] + hash["rawOffset"])
+  end
+
   def restaurant_create
     @restaurant = Restaurant.new(restaurant_params)
   end
 
-  def yelp_cuisine_logic
+  def find_top_cuisine(event)
     # counts the user selection of cuisines and returns the most picked cuisine
     cuisine_array = []
-    @event.invitations.each do |i|
+    event.invitations.each do |i|
       cuisine_array << i.cuisine.name
     end
-    @most_frequent_cuisine = cuisine_array.max_by { |i| cuisine_array.count(i) }
+    cuisine_array.max_by { |i| cuisine_array.count(i) }
   end
 
-  def yelp_location_logic
+  def find_geo_center(event)
     # accept an an array of hashes of user co-ordinates and return the geographical center
     coords_array = []
-    @event.invitations.each do |i|
+    event.invitations.each do |i|
       coords_array << { latitude: i.latitude, longitude: i.longitude }
     end
-    @geo_center = average_geo_location(coords_array)
-    # raise
+    average_geo_location(coords_array)
   end
 
   def average_geo_location(coords)
@@ -68,42 +78,76 @@ class ResultsController < ApplicationController
     { latitude: central_latitude * 180 / Math::PI, longitude: central_longitude * 180 / Math::PI }
   end
 
-  def yelp_api_call(geo_center, most_frequent_cuisine)
-    # calls api with results of yelp_cuisine_logic and yelp_location
-    # example url = https://api.yelp.com/v3/businesses/search?term=thai,restaurants&latitude=37.786882&longitude=-122.399972
-    url = URI("https://api.yelp.com/v3/businesses/search?term=#{most_frequent_cuisine}&latitude=#{geo_center[:latitude]}&longitude=#{geo_center[:longitude]}&radius=5000")
-    https = Net::HTTP.new(url.host, url.port)
-    https.use_ssl = true
-    request = Net::HTTP::Get.new(url)
-    request["Authorization"] = ENV["YELP_KEY"]
-    response = https.request(request)
-    yelp_json = JSON.parse(response.read_body)
-    create_restaurant(yelp_json["businesses"].first)
+  def yelp_results(lat, long, food)
+    radius = 2000
+    fail_block = "22221231231212512"
+    # url = URI("https://api.yelp.com/v3/businesses/search?term=#{food}&latitude=#{lat}&longitude=#{long}&radius=#{radius}&open_at=#{time}")
+    url = URI("https://api.yelp.com/v3/businesses/search?term=#{food}&latitude=#{lat}&longitude=#{long}&radius=#{radius}")
+    api_key = ENV["YELP_KEY"]
+    response = api_call(url, api_key)
+    yelp_json = parse(response)["businesses"]
+    ordered_results = sort_yelp_results(yelp_json, radius)
+    create_restaurant_yelp(ordered_results.first)
+  end
+
+  def sort_yelp_results(json, radius)
+    json.map do |j|
+      decide_rating = j["rating"] * (radius - j["distance"])
+      j["decide_rating"] = decide_rating
+    end
+    json.sort_by { |hash| -hash['decide_rating'] }
   end
 
   def zomato_api_call(geo_center, cuisine)
-    url = URI("https://developers.zomato.com/api/v2.1/search?q=#{cuisine}&lat=#{geo_center[:latitude]}&lon=#{geo_center[:longitude]}&radius=1000&sort=real_distance")
-    https = Net::HTTP.new(url.host, url.port)
-    https.use_ssl = true
-    request = Net::HTTP::Get.new(url)
-    request["user-key"] = ENV["ZOMATO_KEY"]
-    response = https.request(request)
-    zomato_json = JSON.parse(response.read_body)
-    create_restaurant(zomato_json["restaurants"]["name"].first)
+    # search_radius = 0
+    # url = URI("https://developers.zomato.com/api/v2.1/search?q=#{cuisine}&lat=#{geo_center[:latitude]}&lon=#{geo_center[:longitude]}&radius=#{search_radius}&sort=real_distance")
+    # https = Net::HTTP.new(url.host, url.port)
+    # https.use_ssl = true
+    # request = Net::HTTP::Get.new(url)
+    # request["user-key"] = ENV["ZOMATO_KEY"]
+    # response = https.request(request)
+    # zomato_json = JSON.parse(response.read_body)
+    # raise
+    # create_restaurant(zomato_json["restaurants"]["name"].first)
   end
 
-  def create_restaurant(hash)
+  def create_restaurant_yelp(hash)
+    new_restaurant = Restaurant.new(
+      yelp_id: hash["url"],
+      name: hash["name"],
+      description: hash["categories"][0]["title"],
+      location: hash[
+        "location"]["display_address"].join(", "),
+      rating: hash["rating"]
+    )
+    new_restaurant.save!
+  end
+
+  def create_restaurant_zomato(hash)
     new_restaurant = Restaurant.new(
       yelp_id: hash["id"],
       name: hash["name"],
       description: hash["categories"][0]["title"],
-      location: hash["location"]["display_address"].first,
+      location: hash[
+        "location"]["display_address"].join(", "),
       rating: hash["rating"]
     )
     new_restaurant.save!
   end
 
   private
+
+  def api_call(url, api_key)
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    request["Authorization"] = api_key
+    https.request(request)
+  end
+
+  def parse(response)
+    JSON.parse(response.read_body)
+  end
 
   def result_params
     params.permit(:event_id)
