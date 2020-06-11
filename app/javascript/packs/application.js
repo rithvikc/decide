@@ -23,8 +23,10 @@ require("channels")
 // ----------------------------------------------------
 
 // External imports
-import "bootstrap";
 import "../plugins/flatpickr"
+import "bootstrap";
+
+
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
@@ -39,3 +41,9 @@ document.addEventListener('turbolinks:load', () => {
   initPlaces();
 })
 
+document.addEventListener("DOMContentLoaded",function() {
+    window.jQuery('select').select2({
+      width: '100%'
+    });
+
+});

@@ -1,8 +1,11 @@
 <section class="jumbotron">
-  <h1>Welcome back, <%= @user.name %></h1>
-  <h2 class="mt-2"><%= @user.email %></h2>
-  <h2> <%= link_to "Manage Events", events_path, class: "button mt-3" %></h2>
-  <br>
+  <h1 class ="center">Welcome back, <%= @user.name %></h1>
 
-  <%= link_to "Create New Event", new_event_path, class: "button mt-3" %>
+<h1><%= image_tag "https://res.cloudinary.com/rithvik/image/upload/v1591708545/thedecision_5_uprpsf.png" %></h1>
+  <div class= "btn-group-vertical">
+     <%= link_to "Manage Events", events_path, class: "button m-3" %>
+     <%= link_to "Create New Event", new_event_path, class: "button m-3" %>
+  </div>
+
+
 </section>
