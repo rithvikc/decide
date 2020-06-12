@@ -6,10 +6,18 @@
       <%= f.input :location, input_html: {id:"location"} %>
       <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false %>
     </div>
-    <textarea class="js-friends-value"></textarea>
+    
     <div class="form-actions">
         <%= f.button :submit, class:'btn btn-outline-dark dp-border-radius mb-3'%>
     </div>
 <% end %>
 
-
+<h2>Are you attending?</h2>
+<div class="switch-field">
+  <input type="radio" id="radio-two" name="switch-two" value="maybe" checked/>
+  <label for="radio-two">Pending</label>
+  <input type="radio" id="radio-one" name="switch-two" value="yes"/>
+  <label for="radio-one">Attending</label>
+  <input type="radio" id="radio-three" name="switch-two" value="no" />
+  <label for="radio-three">Not Attending</label>
+</div>
