@@ -1,27 +1,24 @@
-<div>
-  <h1><%= @event.name %></h1>
-  <p><%= @event.description %></p>
-  <p><%= @event.start_at %></p>
-</div>
-
-<h5>Invite Friends</h5>
-<div class="input-group" id="friends-form">
-  <input type="text" id="friend-email" class="form-control" placeholder="Friend's email address">
-  <div class="input-group-append">
-    <input value="Add friend" class="btn btn-outline-secondary js-add-friend-btn" type="submit">
-  </div>
-</div>
-
-<div class="list-friends">
-
-</div>
-<br>
-
-<table class="table dp-border-radius">
+<div class="card mb-3">
+  <div class="card-body">
+    <h3 class="card-title"><%= @event.name %></h3>
+    <p><i class="fas fa-calendar-day mr-3"></i><%= @event.start_at %></p>
+    <p><i class="fas fa-utensils mr-3"></i><%= @event.description %></p>
+    <br>
+    <h5>Invite Friends</h5>
+    <div class="input-group" id="friends-form">
+      <input type="text" id="friend-email" class="form-control" placeholder="Friend's email address">
+      <div class="input-group-append">
+        <input value="Add friend" class="btn btn-outline-secondary js-add-friend-btn" type="submit">
+      </div>
+    </div>
+    <div class="list-friends">
+    </div>
+    <br>
+    <table class="table dp-border-radius">
       <tr>
         <th>Guest Email</th>
         <th>Located in</th>
-        <th>Chosen</th>
+        <th>Cuisine</th>
       </tr>
       <% @event.invitations.each do | invitation|%>
         <tr>
@@ -30,15 +27,16 @@
           <td><%= invitation.cuisine.name %></td>
         </tr>
       <% end %>
-</table>
-
-<textarea class="js-friends-value"></textarea><br>
-
-<div class ="btn-group-vertical">
-  <%= link_to "Send invitation here", event_invitation_path(@event), class: "button" %>
-
-  <%= button_to "Create Result!", event_results_path(@event), class: "button", method: :post %>
-
+    </table>
+    <textarea class="js-friends-value"></textarea><br>
+    <br>
+    <div class ="btn-group-vertical">
+      <%= button_to"Send invitations!", event_invitation_path(@event), class: "btn btn-outline-dark rounded-decide mb-3" %>
+      <%= button_to "Create Result!", event_results_path(@event), class: "btn btn-outline-dark rounded-decide mb-3", method: :post %>
+      <%= javascript_pack_tag 'pages/new_invitation' %>
+    </div>
+  </div>
 </div>
 
-<%= javascript_pack_tag 'pages/new_invitation' %>
+
+
