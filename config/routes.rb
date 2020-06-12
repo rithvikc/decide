@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :restaurants, only: :create
   resources :events, only: [:new, :create, :show, :index] do
+    resources :mass_invitations, only: [:create]
     resources :invitations, only: [:new, :create, :show]
     resources :cuisine_events, only: [:create]
     resources :results, only: [:new, :create, :show]
