@@ -12,5 +12,4 @@ class CuisineEventsController < ApplicationController
       render 'events/new'
     end
   end
-
 end
