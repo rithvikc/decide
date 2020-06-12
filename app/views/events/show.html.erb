@@ -39,8 +39,9 @@
     <h5>Who have you invited?</h5>
     <textarea class="js-friends-value"></textarea><br>
     <br>
-    <div class ="text-center">
-      <%= button_to"Send invitations!", event_invitation_path(@event), class: "btn btn-outline-dark rounded-decide mb-3" %>
+    <div class ="btn-group-vertical">
+      <%= button_to "Send invitations!", event_invitation_path(@event), class: "btn btn-outline-dark mb-3 rounded-decide", method: :get %>
+      <%= button_to "Create an invitation!", new_event_invitation_path(@event), class: "btn btn-outline-dark rounded-decide mb-3", method: :get%>
       <%= button_to "Create Result!", event_results_path(@event), class: "btn btn-outline-dark rounded-decide mb-3", method: :post %>
       <%= javascript_pack_tag 'pages/new_invitation' %>
     </div>
