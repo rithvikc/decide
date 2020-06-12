@@ -11,6 +11,5 @@ class Users::InvitationsController < Devise::InvitationsController
   private
 
   def accept_resource
-    raise
   end
 end

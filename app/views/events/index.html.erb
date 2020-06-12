@@ -1,8 +1,10 @@
-<div class = "container">
-  <h1 class = "mb-5">All your Current Events</h1>
-  <% @events.each do |event| %>
-    <h3><%= event.name %></h3>
-    <p><%= event.description %></p>
-    <p>at <%= event.start_at %></p>
+<div class = "card rounded-decide">
+  <div class="card-body">
+  <h1 class = "card-title mb-5">Your events</h1>
+  <% @user_invitations.each do |i| %>
+    <h3><%= link_to i.event.name, event_path(i.event) %></h3>
+    <p><i class="far fa-comment mr-3"></i><%= i.event.description %></p>
+    <p><i class="fas fa-calendar-day mr-3 mb-3"></i><%= i.event.start_at %></p>
     <% end %>
+  </div>
 </div>
