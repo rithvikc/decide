@@ -1,15 +1,17 @@
-<h1>Create an invitation</h1>
-<br>
-
-<%= simple_form_for [@event, @invitation] do |f| %>
+<div class="card rounded-decide">
+  <div class="card-body">
+    <h1 class="card-title"><%= @event.name %></h1>
+    <p><i class="fas fa-calendar-day mr-3"></i><%= @event.start_at %></p>
+    <p><i class="far fa-comment mr-3"></i><%= @event.description %></p>
+      <%= simple_form_for [@event, @invitation] do |f| %>
     <div class="form-inputs">
-      <%= f.input :location, input_html: {id:"location"} %>
-      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false %>
+      <%= f.input :location, input_html: {id:"location"}, placeholder: "Where are you?" %>
+      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false,  label: "What do you want to eat?" %>
     </div>
-    <textarea class="js-friends-value"></textarea>
+  <!--   <textarea class="js-friends-value"></textarea> -->
     <div class="form-actions">
         <%= f.button :submit, class:'btn btn-outline-dark dp-border-radius mb-3'%>
     </div>
-<% end %>
-
-
+  <% end %>
+  </div>
+</div>

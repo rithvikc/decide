@@ -1,14 +1,16 @@
-<h1>Event Invitation</h1>
-<br>
 
-
-<%= simple_form_for [@event, @invitation] do |f| %>
+<div class="card rounded-decide">
+  <div class="card-body">
+    <h1 class="card-title">Event Invitation</h1>
+      <%= simple_form_for [@event, @invitation] do |f| %>
     <div class="form-inputs">
       <%= f.input :location, input_html: {id:"location"} %>
       <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false %>
     </div>
-    <textarea class="js-friends-value"></textarea>
+  <!--   <textarea class="js-friends-value"></textarea> -->
     <div class="form-actions">
         <%= f.button :submit, class:'btn btn-outline-dark dp-border-radius mb-3'%>
     </div>
-<% end %>
+  <% end %>
+  </div>
+</div>
