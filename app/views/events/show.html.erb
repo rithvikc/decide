@@ -11,30 +11,42 @@
         <input value="Add friend" class="btn btn-outline-secondary js-add-friend-btn" type="submit">
       </div>
     </div>
-    <div class="list-friends"></div>
 
-    <div class="text-center">
-      <textarea class="js-friends-value m-3"></textarea>
-    </div>
 
+   <!--  <form id="friends-form">
+      <input type="email" id="friend-email" class="form-control" placeholder="Friend's email address">
+      <div class="input-group-append">
+        <input value="Add friend" class="btn btn-outline-secondary js-add-friend-btn" type="submit">
+      </div>
+    </form> -->
+
+ <!--    <div class="list-friends">
+    </div> -->
     <br>
     <table class="table dp-border-radius">
       <tr>
         <th>Guest Email</th>
+        <th>Guest Status</th>
         <th>Located in</th>
         <th>Cuisine</th>
       </tr>
       <% @event.invitations.each do | invitation|%>
         <tr>
           <td><%= invitation.user.email %></td>
+          <td><%= invitation.status %></td>
           <td><%= invitation.location %></td>
           <td><%= invitation.cuisine.name %></td>
         </tr>
       <% end %>
     </table>
-    <div class ="text-center">
-      <%= button_to"Send invitations!", event_invitation_path(@event), class: "btn btn-outline-dark rounded-decide m-3" %>
-      <%= button_to "Create Result!", event_results_path(@event), class: "btn btn-outline-dark rounded-decide m-3", method: :post %>
+
+    <h5>Who have you invited?</h5>
+    <textarea class="js-friends-value"></textarea><br>
+    <br>
+    <div class ="btn-group-vertical">
+      <%= button_to "Send invitations!", event_invitation_path(@event), class: "btn btn-outline-dark mb-3 rounded-decide", method: :get %>
+      <%= button_to "Create an invitation!", new_event_invitation_path(@event), class: "btn btn-outline-dark rounded-decide mb-3", method: :get%>
+      <%= button_to "Create Result!", event_results_path(@event), class: "btn btn-outline-dark rounded-decide mb-3", method: :post %>
       <%= javascript_pack_tag 'pages/new_invitation' %>
     </div>
   </div>
