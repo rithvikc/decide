@@ -23,7 +23,6 @@ require("channels")
 // ----------------------------------------------------
 
 // External imports
-import "../plugins/flatpickr"
 import "bootstrap";
 
 
@@ -39,11 +38,8 @@ import { initPlaces } from '../plugins/init_gplaces_widget';
 
 document.addEventListener('turbolinks:load', () => {
   initPlaces();
+  window.jQuery('select').select2({
+    width: '100%'
+  });
 })
 
-document.addEventListener("DOMContentLoaded",function() {
-    window.jQuery('select').select2({
-      width: '100%'
-    });
-
-});
