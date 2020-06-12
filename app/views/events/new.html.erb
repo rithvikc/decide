@@ -1,28 +1,23 @@
 <h1>Create an event</h1>
 
 <div class="form-post">
+  <%= simple_form_for(@event) do |f| %>
+      <div class="form-inputs">
+        <%= f.input :name, placeholder: "Please enter the name of your event"%>
+        <%= f.input :description, placeholder: "A short description of your event" %>
 
-<%= simple_form_for(@event) do |f| %>
-    <div class="form-inputs">
-      <%= f.input :name, placeholder: "Please enter your Name"%>
-      <%= f.input :description, placeholder: "A short description of your event" %>
+        <%= f.simple_fields_for :invitations do |w| %>
 
-      <%= f.simple_fields_for :invitations do |w| %>
+        <!--  <%= w.input :location, input_html: {id:"location"}, placeholder: "Please enter your location" %> -->
 
-        <%= w.input :location, input_html: {id:"location"}, placeholder: "Please enter your location" %>
-
-      <% end %>
-      <%= f.input :start_at, as: :datetime, html5: true, input_html: {class: "datepicker"} %>
-      <p>Cuisine's of Choice</p>
-      <%= f.collection_select(:cuisines, Cuisine.all, :id, :name,{}, {:multiple => true} ) %>
-    </div>
-
-
-
-    <div class="form-actions">
-        <%= f.button :submit, class:'btn btn-outline-dark dp-border-radius mb-3'%>
-    </div>
-</div>
+        <% end %>
+        <%= f.input :start_at, as: :datetime, html5: true, input_html: {class: "datepicker"} %>
+        <%= f.association :cuisine_events, as: :select, collection: Cuisine.all, input_html: { multiple: true }, include_hidden: false %>
+      </div>
+      <div class="form-actions">
+          <%= f.button :submit, class:'btn btn-outline-dark dp-border-radius mb-3'%>
+      </div>
+  </div>
 <% end %>
 
 
