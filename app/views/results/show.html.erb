@@ -1,25 +1,13 @@
-<h1>Result!</h1>
-<p>Yelp ID:<%= @result.restaurant.yelp_id %></p>
-<p>Name: <%= @result.restaurant.name %></p>
-<p>Description: <%= @result.restaurant.description %></p>
-<p>Location: <%= @result.restaurant.location %></p>
-<p>Rating: <%= @result.restaurant.ratings %></p>
-
-<p>Note: card below should be a rendered partial :)</p>
-
-<div class="card" style="width: 32rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
+<div class="card mb-3">
+  <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg" style="height: 350px; border-radius: 8px 8px 0px 0px !important;" class="card-img-top" alt="...">
   <div class="card-body">
-    <h5 class="card-title">Name:</h5>
-    <p class="card-text"><%= @result.restaurant.name %></p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item"><%= @result.restaurant.description %></li>
-    <li class="list-group-item"><%= @result.restaurant.location %></li>
-    <li class="list-group-item">Rating:<%= @result.restaurant.ratings %></li>
-  </ul>
-  <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h3 class="card-title">See you there!</h3>
+    <p><i class="fas fa-external-link-alt mr-3"></i><%= link_to @result.restaurant.name, @result.restaurant.yelp_id %></p>
+    <p><i class="fas fa-calendar-day mr-3"></i><%= @result.event.start_at %></p>
+    <p><i class="fas fa-utensils mr-3"></i><%= @result.restaurant.description %></p>
+    <p><i class="fas fa-thumbtack mr-3"></i><%= @result.restaurant.location %></p>
+    <% @result.restaurant.ratings.to_i.times do  %>
+      <i class="fas fa-star"></i>
+    <% end %>
   </div>
 </div>

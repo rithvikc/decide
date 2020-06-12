@@ -1,0 +1,176 @@
+// This is where you override dark theme variables
+
+//colors
+
+$dp-black: #121212;
+$dp-black-em-med: rgba(0, 0, 0, 0.74);
+$dp-bg: #fefefe;
+$dp-accent: #72D3F5;
+$dp-em-hi: rgba(255, 255, 255, 0.87);
+$dp-em-med: rgba(255, 255, 255, 0.6);
+$dp-disabled: rgba(255, 255, 255, 0.38);
+$dp-00: rgba(255, 255, 255, 0.05);
+$dp-01: rgba(255, 255, 255, 0.07);
+$dp-02: rgba(255, 255, 255, 0.08);
+$dp-03: rgba(255, 255, 255, 0.08);
+$dp-04: rgba(255, 255, 255, 0.09);
+$dp-06: rgba(255, 255, 255, 0.11);
+$dp-08: rgba(255, 255, 255, 0.12);
+$dp-12: rgba(255, 255, 255, 0.14);
+$dp-16: rgba(255, 255, 255, 0.15);
+$dp-24: rgba(255, 255, 255, 0.16);
+
+//styling
+$dp-border-radius: 15px !important;
+
+.dp-border-radius {
+  border-radius: $dp-border-radius;
+}
+
+.dp-border-accent {
+
+}
+
+p {
+  color: $dp-black-em-med;
+}
+
+h1 {
+  color: $dp-black;
+}
+
+h2 {
+  color: $dp-black;
+}
+
+h3 {
+  color: $dp-black;
+}
+
+h4 {
+  color: $dp-black;
+}
+
+h5 {
+  color: $dp-black;
+}
+
+h6 {
+  color: $dp-black;
+}
+
+ul {
+  color: $dp-black-em-med;
+}
+
+ol {
+  color: $dp-black-em-med;
+}
+
+.light-text {
+  p {
+  color: $dp-em-med;
+  }
+
+  h1 {
+    color: $dp-em-hi;
+  }
+
+  h2 {
+    color: $dp-em-hi;
+  }
+
+  h3 {
+    color: $dp-em-hi;
+  }
+
+  h4 {
+    color: $dp-em-hi;
+  }
+
+  h5 {
+    color: $dp-em-hi;
+  }
+
+  h6 {
+    color: $dp-em-hi;
+  }
+
+  ul {
+    color: $dp-black-em-med;
+  }
+
+  ol {
+    color: $dp-black-em-med;
+  }
+}
+
+.dp-bg-emphasis {
+  background: rgba(255, 255, 255, 0.87);
+}
+
+.dp-container {
+  border-radius: $dp-border-radius;
+  padding: 30px;
+}
+
+.dp-00 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) $dp-bg;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.dp-01 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.07)) $dp-bg;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 1px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14);
+}
+
+.dp-02 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)) $dp-bg;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 1px rgba(0, 0, 0, 0.12), 0px 2px 2px rgba(0, 0, 0, 0.14);
+}
+
+.dp-03 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08)) $dp-bg;
+  box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.2), 0px 3px 3px rgba(0, 0, 0, 0.12), 0px 3px 4px rgba(0, 0, 0, 0.14);
+}
+
+.dp-04 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09)) $dp-bg;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 4px 5px rgba(0, 0, 0, 0.14);
+}
+
+.dp-06 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.11)) $dp-bg;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2), 0px 1px 18px rgba(0, 0, 0, 0.12), 0px 6px 10px rgba(0, 0, 0, 0.14);
+}
+
+.dp-08 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)) $dp-bg;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.14);
+}
+
+.dp-12 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.14)) $dp-bg;
+  box-shadow: 0px 7px 8px rgba(0, 0, 0, 0.2), 0px 5px 22px rgba(0, 0, 0, 0.12), 0px 12px 17px rgba(0, 0, 0, 0.14);
+}
+
+.dp-16 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15)) $dp-bg;
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 16px 24px rgba(0, 0, 0, 0.14);
+}
+
+.dp-24 {
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.16)) $dp-bg;
+  box-shadow: 0px 11px 15px rgba(0, 0, 0, 0.2), 0px 9px 46px rgba(0, 0, 0, 0.12), 0px 24px 38px rgba(0, 0, 0, 0.14);
+}
+
+// Effects
+
+.dp-desaturate {
+  filter: grayscale(75%);
+}
+
+.dp-overlay {
+  background-image: linear-gradient(rgba(0,0,0,.5));
+}
+
