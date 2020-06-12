@@ -1,5 +1,5 @@
 const friendsListEl = document.querySelector('.list-friends');
-const addFriendBtnEl = document.querySelector('.js-add-friend-btn');
+const addFriendFormEl = document.querySelector('.js-add-friend-form');
 const friendEmailEl = document.getElementById("friend-email");
 const friendEmails = ['john@gmail.com'];
 const friendEmailValueEl = document.querySelector('.js-friends-value');
@@ -22,7 +22,7 @@ const renderTags = () => {
 
 renderTags();
 
-addFriendBtnEl.addEventListener("click", (event) => {
+addFriendFormEl.addEventListener("submit", (event) => {
   event.preventDefault();
   friendEmails.push(friendEmailEl.value);
   renderTags();
