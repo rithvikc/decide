@@ -2,12 +2,12 @@
   <h1><%= image_tag "https://res.cloudinary.com/rithvik/image/upload/v1591708545/thedecision_5_uprpsf.png" %></h1>
     <div class="btn-group-vertical">
     <% if user_signed_in? %>
-      <%= link_to "Create New Event", new_event_path, class: "button mt-3" %>
-      <%= link_to "Manage Events", events_path, class: "button" %>
+      <%= link_to "Create New Event", new_event_path, class: "button rounded-decide" %>
+      <%= link_to "Manage Events", events_path, class: "button rounded-decide" %>
     <br>
     <% else %>
-      <%= link_to "SIGN UP", new_user_registration_path, class: "button" %>
-      <%= link_to "LOG IN", new_user_session_path, class: "button" %>
+      <%= link_to "SIGN UP", new_user_registration_path, class: "button rounded-decide" %>
+      <%= link_to "LOG IN", new_user_session_path, class: "button rounded-decide" %>
     <% end %>
   </div>
 </div>
