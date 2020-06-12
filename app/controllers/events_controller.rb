@@ -31,12 +31,12 @@ class EventsController < ApplicationController
   def cuisine_event_params(event_params)
     @save_count = 0
     event_params[:cuisine_event_ids].each do |id|
-        @cuisine_event = CuisineEvent.new
-        @cuisine = Cuisine.find(id.to_i)
-        @cuisine_event.cuisine = @cuisine
-        @cuisine_event.event = @event
-        @cuisine_event.save!
-        @save_count += 1
+      @cuisine_event = CuisineEvent.new
+      @cuisine = Cuisine.find(id.to_i)
+      @cuisine_event.cuisine = @cuisine
+      @cuisine_event.event = @event
+      @cuisine_event.save!
+      @save_count += 1
     end
   end
 
