@@ -9,6 +9,8 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    @user = current_user
+    @user_invitations = Invitation.where(user: @user)
   end
 
   def create
