@@ -10,7 +10,6 @@
     "bootstrap": "^4.5.0",
     "channels": "0.0.4",
     "dotenv": "^8.2.0",
-    "flatpickr": "^4.6.3",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0"
