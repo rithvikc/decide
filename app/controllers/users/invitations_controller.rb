@@ -1,15 +1,8 @@
 class Users::InvitationsController < Devise::InvitationsController
 
-  def edit
-    super
-  end
-
-  def update
-    super
-  end
-
   private
 
-  def accept_resource
+  def after_accept_path_for(resource)
+    '/events'
   end
 end
