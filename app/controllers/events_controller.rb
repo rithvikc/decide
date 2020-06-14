@@ -25,7 +25,15 @@ class EventsController < ApplicationController
   end
 
   def show
-    @invitation = Invitation.new
+    # @invitation = Invitation.new
+    @markers = @event.invitations.map do |i|
+      {
+        lat: i.latitude,
+        lng: i.longitude,
+        # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
+        image_url: helpers.asset_url('map-user-blue.png')
+      }
+    end
   end
 
   private

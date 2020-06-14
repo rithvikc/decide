@@ -1,6 +1,6 @@
-<div class="jumbotron">
-  <h1><%= image_tag "https://res.cloudinary.com/rithvik/image/upload/v1591708545/thedecision_5_uprpsf.png" %></h1>
-    <div class="btn-group-vertical">
+<div class="jumbotron fill">
+  <h1><%= image_tag "thedecision_cropped.png" %></h1>
+    <div class="btn-group-vertical mt-4">
     <% if user_signed_in? %>
       <%= link_to "Create New Event", new_event_path, class: "button rounded-decide" %>
       <%= link_to "Manage Events", events_path, class: "button rounded-decide" %>

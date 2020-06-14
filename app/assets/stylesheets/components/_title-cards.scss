@@ -1,0 +1,28 @@
+.div-shape {
+  border-radius: 100% 0% 100% 0% / 0% 20% 20% 100%;
+  width: 100vw;
+  height: 7rem;
+  position: relative;
+  z-index: 1;
+}
+
+.div-shape-sm {
+  border-radius: 100% 0% 100% 0% / 0% 20% 20% 100%;
+  width: 100vw;
+  height: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.div-gradient {
+background-color: $gray;
+// background-image: linear-gradient(180deg, $gray 30%, $d-blue 90%);
+  h2 {
+    color: $d-white;
+    font-weight: bold;
+  }
+  p {
+    color: $d-white;
+    margin-bottom: 0px;
+  }
+}
