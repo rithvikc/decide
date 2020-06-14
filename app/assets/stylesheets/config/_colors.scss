@@ -3,10 +3,24 @@
 // For example:
 $red: #FD1015;
 $blue: #167FFB;
-$light-blue: #A8D0E6;
+$white: #FFFFFF;
 $yellow: #FFC65A;
 $orange: #E67E22;
 $green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+$gray: #EBC547;
+$light-gray: #fbfbfb;
 $brand-prmary: #A8D0E6;
+
+// Decide colours
+$d-white: #FFFFFF;
+$d-black: #0c0c0c;
+$d-black-t1: rgba(13, 13, 13, 0.1);
+$d-blue: #083D77;
+$d-red: #F95738;
+$d-red-t: rgba(249, 87, 56, 0.7);
+$d-green: #70AE6E;
+$d-green-t: rgba(112, 174, 110, 0.5);
+$d-solid-btn: $d-blue;
+
+// Style Variables
+$d-border-radius: 8px;

@@ -1,49 +1,44 @@
-<div class="card mb-3">
-  <div class="card-body">
-    <h3 class="card-title"><%= @event.name %></h3>
-    <p><i class="fas fa-calendar-day mr-3"></i><%= @event.start_at %></p>
-    <p><i class="fas fa-utensils mr-3"></i><%= @event.description %></p>
-    <br>
-    <h5>Invite Friends</h5>
-
-    <div class="input-group" id="friends-form">
-      <input type="text" id="friend-email" class="form-control" placeholder="Friend's email address">
-      <div class="input-group-append">
-        <input value="Add friend" class="btn btn-outline-secondary js-add-friend-btn" type="submit">
-      </div>
-    </div>
-
-
-
-    <br>
-    <table class="table dp-border-radius">
-      <tr>
-        <th>Guest Email</th>
-        <th>Guest Status</th>
-        <th>Located in</th>
-        <th>Cuisine</th>
-      </tr>
-      <% @event.invitations.each do | invitation|%>
-        <tr>
-          <td><%= invitation.user.email %></td>
-          <td><%= invitation.status %></td>
-          <td><%= invitation.location %></td>
-          <td><%= invitation.cuisine.name %></td>
-        </tr>
-      <% end %>
-    </table>
-
-    <div class ="text-center">
-      <h5>Who have you invited?</h5>
-      <textarea class="js-friends-value"></textarea><br>
-      <br>
-        <%= button_to "Send invitations!", event_invitation_path(@event), class: "btn btn-outline-dark mb-3 rounded-decide", method: :get %>
-        <%= button_to "Create an invitation!", new_event_invitation_path(@event), class: "btn btn-outline-dark rounded-decide mb-3", method: :get%>
-        <%= button_to "Create Result!", event_results_path(@event), class: "btn btn-outline-dark rounded-decide mb-3", method: :post %>
-    </div>
+<div class="div-shape div-gradient">
+  <div class="container">
+    <h2 class="mb-2 text-break"><%= @event.name %></h2>
+    <p><i class="fas fa-calendar-day mr-3" style="color: #083D77;"></i><%= @event.start_at.strftime("%A, %b %d") %></p>
+    <p><i class="far fa-clock mr-3" style="color: #083D77;"></i><%= @event.start_at.strftime("%I:%M %P") %></p>
   </div>
 </div>
-
+<div id="map" class="map-overlap"  style="width: 100%; height: 12em;"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+</div>
+<div class="container mt-4 mb-4">
+  <h5 class="text-center text-break"><i class="far fa-comment mr-3"></i><%= @event.description %></h5>
+  <div class="mt-4 mb-4">
+  <h6><strong>Invite friends</strong></h6>
+    <div class="input-group mt-4 mb-4" id="friends-form">
+      <input type="text" id="friend-email" class="form-control rounded-decide" placeholder="Friend's email address">
+      <div class="input-group-append">
+        <input value="+" class="btn d-btn-dark js-add-friend-btn" type="submit">
+      </div>
+    </div>
+  </div>
+  <div class="mt-4 mb-4">
+    <h6><strong>Who's coming</strong></h6>
+    <div class="d-flex flex-xl-wrap mt-4 mb-4 notification-container">
+      <% @event.invitations.each do |i| %>
+      <div class="notification mr-4 mb-4">
+        <% if i.status == "confirmed" %>
+          <%= image_tag i.user.avatar, alt: "user avatar", class: "avatar-large-confirmed" %>
+        <% else %>
+          <%= image_tag i.user.avatar, alt: "user avatar", class: "avatar-large-pending" %>
+        <% end %>
+        <div class="notification-content">
+          <p><small><%= i.user.email %></small></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+     <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-dark p-2", method: :post %>
+  </div>
+</div>
 <%= javascript_pack_tag 'pages/new_invitation' %>
 
 
