@@ -35,10 +35,10 @@
     <div class="d-flex flex-xl-wrap mt-4 mb-4 notification-container">
       <% @event.invitations.each do |i| %>
       <div class="notification mr-4 mb-4">
-        <% if i.status == "confirmed" %>
-
+         <% if i.status == "confirmed" %>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-confirmed" %>
         <% else %>
-
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-pending" %>
         <% end %>
         <div class="notification-content">
           <p><small><%= i.user.email %></small></p>
