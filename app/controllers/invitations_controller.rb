@@ -1,4 +1,4 @@
-class MassInvitationsController < ApplicationController
+class InvitationsController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
     @invitation = Invitation.new(invitation_params)

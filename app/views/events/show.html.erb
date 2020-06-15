@@ -14,22 +14,17 @@
   <div class="mt-4 mb-4">
 
   <h6><strong>Invite friends</strong></h6>
-<<<<<<< HEAD
-    <form class="input-group js-add-friend-form mt-4 mb-4" id="friends-form">
-      <input type="email" id="friend-email" class="form-control rounded-decide" placeholder="Friend's email address">
-      <div class="input-group-append">
-        <input value="+" class="btn d-btn-dark" type="submit">
-=======
   <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
-    <%= f.input :email, as: :string %>
-    <%= f.submit %>
+    <%= f.input :email, label: false, wrapper_html: {class: "form-inline justify-content-between"} do %>
+      <%= f.input_field :email, as: :email, placeholder: "Friend's email address" %>
+      <%= f.button :submit, '+', class:"btn d-btn-dark", label_html: { class: 'input-group-append'} %>
+    <% end %>
   <% end %>
 
     <div class="input-group mt-4 mb-4" id="friends-form">
       <input type="text" class="form-control rounded-decide friend-email" placeholder="Friend's email address">
       <div class="input-group-append">
         <input type="submit" value="+" class="btn d-btn-dark" id="js-add-friend-btn">
->>>>>>> master
       </div>
     </form>
     <div class="list-friends">
@@ -61,4 +56,15 @@
 <%= javascript_pack_tag 'pages/new_invitation' %>
 
 
-
+<h1>#<%= @event.name %></h1>
+<div id="invitations" data-event-id="<%= @event.id %>">
+  <% @event.invitations.each do |invitation| %>
+    <div class="invitation-container" id="invitation-<%= invitation.id %>">
+      <i class="author">
+        <span><%= invitation.status %></span>
+        <span><%= invitation.user.name %></span>
+        <small><%= invitation.created_at.strftime("%a %b %e at %l:%M%p") %></small>
+      </i>
+    </div>
+  <% end %>
+</div>
