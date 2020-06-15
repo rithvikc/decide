@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { invitations: 'users/invitations' }
+
   root to: 'pages#home'
 
   resource :dashboard, only: [:show]
@@ -10,8 +11,10 @@ Rails.application.routes.draw do
 
   resources :restaurants, only: :create
   resources :events, only: [:new, :create, :show, :index] do
+    resources :mass_invitations, only: [:create]
     resources :invitations, only: [:new, :create, :show]
     resources :cuisine_events, only: [:create]
     resources :results, only: [:new, :create, :show]
+    post 'invite', to: 'events#invite'
   end
 end

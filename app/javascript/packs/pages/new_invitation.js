@@ -1,31 +1,24 @@
 const friendsListEl = document.querySelector('.list-friends');
-const addFriendFormEl = document.querySelector('.js-add-friend-form');
-const friendEmailEl = document.getElementById("friend-email");
-const friendEmails = ['john@gmail.com'];
+const addFriendBtnEl = document.getElementById('js-add-friend-btn');
+const friendEmailEl = document.querySelector('.friend-email');
+const friendEmails = [];
 const friendEmailValueEl = document.querySelector('.js-friends-value');
 
-const renderTags = () => {
+const displayTags = () => {
   friendsListEl.innerHTML = '';
   friendEmails.forEach ( (friendEmail) => {
     const tagEL = document.createElement("div");
     tagEL.innerHTML = friendEmail;
     friendsListEl.appendChild(tagEL);
-    tagEL.addEventListener("click", (event) =>{
-      const friendEmailIndex = friendEmails.indexOf(friendEmail);
-      friendEmails.splice(friendEmailIndex, 1);
-      renderTags();
-    });
   });
-  friendEmailValueEl.value = friendEmails.join();
 }
 
-
-renderTags();
-
-addFriendFormEl.addEventListener("submit", (event) => {
+addFriendBtnEl.addEventListener("click", (event) => {
+  console.log("clicked");
   event.preventDefault();
   friendEmails.push(friendEmailEl.value);
-  renderTags();
-  friendEmailEl.value = '';
+  console.log(friendEmails);
+  displayTags();
+  // friendEmailEl.value = '';
 });
 
