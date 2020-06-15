@@ -15,23 +15,17 @@
 
   <h6><strong>Invite friends</strong></h6>
   <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
-    <%= f.input :email, as: :string %>
-    <%= f.submit %>
+    <%= f.input :email, as: :string, input_html: { class: 'friend-email', placeholder: "Friend's email address" } %>
+    <%= f.submit 'Invite friend' %>
   <% end %>
 
-    <div class="input-group mt-4 mb-4" id="friends-form">
-      <input type="text" class="form-control rounded-decide friend-email" placeholder="Friend's email address">
-      <div class="input-group-append">
-        <input type="submit" value="+" class="btn d-btn-dark" id="js-add-friend-btn">
-      </div>
-    </div>
-  </div>
-
-<div class="list-friends">
-</div>
-
   <div class="mt-4 mb-4">
-    <h6><strong>Who's coming</strong></h6>
+    <h6><strong>Who's invited</strong></h6>
+    <div class="list-friends d-flex flex-xl-wrap mt-4 mb-4 notification-container">
+      <%= @invited_list  %>
+    </div>
+
+
     <div class="d-flex flex-xl-wrap mt-4 mb-4 notification-container">
       <% @event.invitations.each do |i| %>
       <div class="notification mr-4 mb-4">
@@ -49,7 +43,7 @@
      <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-dark p-2", method: :post %>
   </div>
 </div>
-<%= javascript_pack_tag 'pages/new_invitation' %>
+
 
 
 
