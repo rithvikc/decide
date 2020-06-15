@@ -13,11 +13,13 @@
   <h5 class="text-center text-break"><i class="far fa-comment mr-3"></i><%= @event.description %></h5>
   <div class="mt-4 mb-4">
   <h6><strong>Invite friends</strong></h6>
-    <div class="input-group mt-4 mb-4" id="friends-form">
-      <input type="text" id="friend-email" class="form-control rounded-decide" placeholder="Friend's email address">
+    <form class="input-group js-add-friend-form mt-4 mb-4" id="friends-form">
+      <input type="email" id="friend-email" class="form-control rounded-decide" placeholder="Friend's email address">
       <div class="input-group-append">
-        <input value="+" class="btn d-btn-dark js-add-friend-btn" type="submit">
+        <input value="+" class="btn d-btn-dark" type="submit">
       </div>
+    </form>
+    <div class="list-friends">
     </div>
   </div>
   <div class="mt-4 mb-4">

@@ -100,14 +100,13 @@ class ResultsController < ApplicationController
 
   def zomato_api_call(geo_center, cuisine)
     # search_radius = 0
-    # url = URI("https://developers.zomato.com/api/v2.1/search?q=#{cuisine}&lat=#{geo_center[:latitude]}&lon=#{geo_center[:longitude]}&radius=#{search_radius}&sort=real_distance")
+    # url = URI("https://developers.zomato.com/api/v2.1/search?lat=#{geo_center[:latitude]}&lon=#{geo_center[:longitude]}&&cuisines=#{cuisine}&radius=500&sort=real_distance&order=asc&start=0&count=5")
     # https = Net::HTTP.new(url.host, url.port)
     # https.use_ssl = true
     # request = Net::HTTP::Get.new(url)
-    # request["user-key"] = ENV["ZOMATO_KEY"]
+    # zomato_instance = Romato::Zomato.new("ENV["ZOMATO_KEY"]")
     # response = https.request(request)
     # zomato_json = JSON.parse(response.read_body)
-    # raise
     # create_restaurant(zomato_json["restaurants"]["name"].first)
   end
 
@@ -138,6 +137,14 @@ class ResultsController < ApplicationController
   private
 
   def api_call(url, api_key)
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    request["Authorization"] = api_key
+    https.request(request)
+  end
+
+  def zomApi_call(url, api_key)
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
     request = Net::HTTP::Get.new(url)
