@@ -3,7 +3,6 @@ class ResultsController < ApplicationController
   require 'open-uri'
   require "uri"
   require 'net/http'
-  require 'Geocoder'
 
   def show
     @result = Result.find(params[:id])
