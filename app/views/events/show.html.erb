@@ -15,8 +15,10 @@
 
   <h6><strong>Invite friends</strong></h6>
   <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
-    <%= f.input :email, as: :string, input_html: { class: 'friend-email', placeholder: "Friend's email address" } %>
-    <%= f.submit 'Invite friend' %>
+    <%= f.input :email, label: false, wrapper_html: {class: "form-inline justify-content-between"} do %>
+      <%= f.input_field :email, as: :email, placeholder: "Friend's email address" %>
+      <%= f.button :submit, '+', class:"btn d-btn-dark", label_html: { class: 'input-group-append'} %>
+    <% end %>
   <% end %>
 
 
