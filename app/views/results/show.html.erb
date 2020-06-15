@@ -1,13 +1,30 @@
-<div class="card mb-3">
-  <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg" style="height: 350px; border-radius: 8px 8px 0px 0px !important;" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h3 class="card-title">See you there!</h3>
-    <p><i class="fas fa-external-link-alt mr-3"></i><%= link_to @result.restaurant.name, @result.restaurant.yelp_id %></p>
-    <p><i class="fas fa-calendar-day mr-3"></i><%= @result.event.start_at %></p>
-    <p><i class="fas fa-utensils mr-3"></i><%= @result.restaurant.description %></p>
-    <p><i class="fas fa-thumbtack mr-3"></i><%= @result.restaurant.location %></p>
-    <% @result.restaurant.ratings.to_i.times do  %>
+<div class="div-shape-sm div-gradient">
+  <div class="container">
+    <h2 class="mb-2 text-break"><%= @result.event.name %></h2>
+  </div>
+</div>
+<div class="results-overlap" style="background-image: url('https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg'); background-position: center; "></div>
+<div class="container mt-4 mb-4">
+  <h5 class="text-center text-break"><i class="far fa-comment mr-3"></i><%= @result.event.description %></h5>
+  <p><i class="fas fa-external-link-alt mr-3"></i><%= link_to @result.restaurant.name, @result.restaurant.yelp_id %></p>
+  <p><i class="fas fa-calendar-day mr-3"></i><%= @result.event.start_at.strftime("%A, %b %d") %> - <%= @result.event.start_at.strftime("%I:%M %P") %></p>
+  <p><i class="fas fa-thumbtack mr-3"></i><%= @result.restaurant.location %></p>
+   <% @result.restaurant.ratings.to_i.times do  %>
       <i class="fas fa-star"></i>
     <% end %>
+  <div class="mt-4 mb-4">
+    <h6><strong>Who's coming</strong></h6>
+    <div class="d-flex flex-xl-wrap mt-4 mb-4 notification-container">
+      <% @result.event.invitations.each do |i| %>
+      <div class="notification mr-4 mb-4">
+        <% if i.status != "confirmed" %>
+          <%= image_tag i.user.avatar, alt: "user avatar", class: "avatar-large-confirmed" %>
+        <% end %>
+        <div class="notification-content">
+          <p><small><%= i.user.email %></small></p>
+        </div>
+      </div>
+      <% end %>
+    </div>
   </div>
 </div>

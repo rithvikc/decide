@@ -1,22 +1,26 @@
 // Form design
 .form-post {
-  background: white;
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 5px;
-  h1 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 25px;
-    color: #666666;
-    margin-bottom: 50px;
-    margin-top: 0px;
-  }
-  .btn {
-    width: 100%;
-    padding: 10px;
-    font-weight: bold;
-  }
+  // background: $light-gray;
+  // // margin-top: 20px;
+  // // padding: 20px;
+  // border-radius: 8px;
+  // h1 {
+  //   text-align: center;
+  //   font-weight: bold;
+  //   font-size: 25px;
+  //   color: #666666;
+  //   margin-bottom: 50px;
+  //   margin-top: 0px;
+  // }
+  // .btn {
+  //   width: 100%;
+  //   padding: 10px;
+  //   font-weight: bold;
+  // }
+}
+
+.form-width {
+  width: 100%;
 }
 
 // Checkboxes design
@@ -48,3 +52,12 @@
 .form-post .select2{
   margin-bottom: 2rem;
 }
+
+.form-control {
+  border-radius: $d-border-radius;
+}
+
+// .input-prepend .add-on,
+// .input-append input {
+//   float: left;
+// }

@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     resources :invitations, only: [:new, :create, :show]
     resources :cuisine_events, only: [:create]
     resources :results, only: [:new, :create, :show]
+    post 'invite', to: 'events#invite'
   end
 end

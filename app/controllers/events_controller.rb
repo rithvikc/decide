@@ -25,7 +25,21 @@ class EventsController < ApplicationController
   end
 
   def show
-    @invitation = Invitation.new
+    # @invitation = Invitation.new
+    @markers = @event.invitations.map do |i|
+      {
+        lat: i.latitude,
+        lng: i.longitude,
+        # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
+        image_url: helpers.asset_url('map-user-blue.png')
+      }
+    end
+  end
+
+  def invite
+    @event = Event.find(params[:event_id])
+    User.invite!(email:email_params[:invite][:email])
+    redirect_to event_path(@event)
   end
 
   private
@@ -53,5 +67,9 @@ class EventsController < ApplicationController
   def create_invitations
     @event = Event.find(params[:id])
     @invitation = Invitation.new
+  end
+
+  def email_params
+    params.permit(invite: :email)
   end
 end

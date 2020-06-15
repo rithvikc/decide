@@ -1,17 +1,41 @@
-// Specific CSS for your home-page
 html, body {
   margin: 0;
   padding: 0;
 }
 
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+::-webkit-scrollbar-track-piece {
+background-color: $d-black-t1;
+-webkit-border-radius: 6px;
+}
+
+
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment  {
+height: 30px;
+display: block;
+background-color: transparent;
+}
+
+.container {
+}
+
 .jumbotron {
   font-family: 'Montserrat', sans-serif;
-  padding: 150px 0;
-  background-color: #A8D0E6;
+  padding: 14vh 0;
+  background-color: $gray;
   background-size: cover;
   text-align: center;
-  color: #fff;
+  color: $d-white;
   position: relative;
+  border-radius: 0px;
+  h2 {
+    color: $d-white;
+  }
 }
 
 .jumbotron h1 {
@@ -48,6 +72,15 @@ html, body {
 }
 
 .rounded-decide {
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
+.overlap {
+  position: absolute;
+  z-index: -1;
+}
+
+.fill {
+    min-height: 100vh;
+    height: 100vh;
+}
