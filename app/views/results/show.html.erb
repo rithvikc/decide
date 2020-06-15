@@ -3,7 +3,11 @@
     <h2 class="mb-2 text-break"><%= @result.event.name %></h2>
   </div>
 </div>
-<div class="results-overlap" style="background-image: url('https://media-cdn.tripadvisor.com/media/photo-s/0e/cc/0a/dc/restaurant-chocolat.jpg'); background-position: center; "></div>
+<% if @result.restaurant.image_url.nil? %>
+  <div class="results-overlap" style="background-image: url('https://b.zmtcdn.com/data/pictures/2/16576632/a17c9aeeff1aee7ad92cedc56572b8f1.jpg'); background-position: center; "></div>
+<% else %>
+  <div class="results-overlap" style="background-image: url('<%= @result.restaurant.image_url %>'); background-position: center; "></div>
+<% end %>
 <div class="container mt-4 mb-4">
   <h5 class="text-center text-break"><i class="far fa-comment mr-3"></i><%= @result.event.description %></h5>
   <p><i class="fas fa-external-link-alt mr-3"></i><%= link_to @result.restaurant.name, @result.restaurant.yelp_id %></p>

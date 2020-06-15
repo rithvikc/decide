@@ -3,7 +3,6 @@ class ResultsController < ApplicationController
   require 'open-uri'
   require "uri"
   require 'net/http'
-  require 'Geocoder'
 
   def show
     @result = Result.find(params[:id])
@@ -139,7 +138,11 @@ class ResultsController < ApplicationController
       description: hash["categories"][0]["title"],
       location: hash[
         "location"]["display_address"].join(", "),
-      ratings: hash["rating"]
+      ratings: hash["rating"],
+      price: hash["price"].size,
+      image_url: hash["image_url"],
+      latitude: hash["coordinates"]["latitude"],
+      longitude: hash["coordinates"]["longitude"]
     )
     new_restaurant.save!
   end
@@ -151,7 +154,11 @@ class ResultsController < ApplicationController
       name: first_result["restaurant"]["name"],
       description: first_result["restaurant"]["cuisines"],
       location: first_result["restaurant"]["location"]["address"],
-      ratings: first_result["restaurant"]["user_rating"]["aggregate_rating"]
+      ratings: first_result["restaurant"]["user_rating"]["aggregate_rating"],
+      price: first_result["restaurant"]["price_range"],
+      image_url: first_result["restaurant"]["featured_image"],
+      latitude: first_result["restaurant"]["location"]["latitude"],
+      longitude: first_result["restaurant"]["location"]["longitude"]
     )
     new_restaurant.save!
   end
