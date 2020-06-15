@@ -3,6 +3,7 @@ class ResultsController < ApplicationController
   require 'open-uri'
   require "uri"
   require 'net/http'
+  require 'Geocoder'
 
   def show
     @result = Result.find(params[:id])
@@ -85,9 +86,17 @@ class ResultsController < ApplicationController
     url = URI("https://api.yelp.com/v3/businesses/search?term=#{food}&latitude=#{lat}&longitude=#{long}&radius=#{radius}")
     api_key = ENV["YELP_KEY"]
     response = api_call(url, api_key)
-    yelp_json = parse(response)["businesses"]
-    ordered_results = sort_yelp_results(yelp_json, radius)
-    create_restaurant_yelp(ordered_results.first)
+    if response.kind_of? Net::HTTPSuccess
+      yelp_json = parse(response)["businesses"]
+      if yelp_json.empty?
+        zomato_api_call(lat, long, food)
+      else
+        ordered_results = sort_yelp_results(yelp_json, radius)
+        create_restaurant_yelp(ordered_results.first)
+      end
+    else
+      zomato_api_call(lat, long, food)
+    end
   end
 
   def sort_yelp_results(json, radius)
@@ -98,6 +107,7 @@ class ResultsController < ApplicationController
     json.sort_by { |hash| -hash['decide_rating'] }
   end
 
+<<<<<<< HEAD
   def zomato_api_call(geo_center, cuisine)
     # search_radius = 0
     # url = URI("https://developers.zomato.com/api/v2.1/search?lat=#{geo_center[:latitude]}&lon=#{geo_center[:longitude]}&&cuisines=#{cuisine}&radius=500&sort=real_distance&order=asc&start=0&count=5")
@@ -108,6 +118,31 @@ class ResultsController < ApplicationController
     # response = https.request(request)
     # zomato_json = JSON.parse(response.read_body)
     # create_restaurant(zomato_json["restaurants"]["name"].first)
+=======
+  def zomato_api_call(lat, long, food)
+    radius = 2000
+    url = URI("https://developers.zomato.com/api/v2.1/search?lat=#{lat}&lon=#{long}&radius=#{radius}&cuisines=#{food}&sort=real_distance&order=desc")
+    https = Net::HTTP.new(url.host, url.port)
+    https.use_ssl = true
+    request = Net::HTTP::Get.new(url)
+    request["user-key"] = ENV["ZOMATO_KEY"]
+    response = https.request(request)
+    zomato_json = JSON.parse(response.read_body)["restaurants"]
+    sort_zomato_results(zomato_json, radius, lat, long)
+    create_restaurant_zomato(zomato_json)
+  end
+
+  def sort_zomato_results(json, radius, lat, long)
+    json.map do |j|
+      r_coords = [j["restaurant"]["location"]["latitude"], j["restaurant"]["location"]["longitude"]]
+      g_coords = [lat, long]
+      distance = Geocoder::Calculations.distance_between(r_coords, g_coords) * 1000
+      rating = j["restaurant"]["user_rating"]["aggregate_rating"].to_f
+      decide_rating = rating * (radius - distance)
+      j["decide_rating"] = decide_rating
+    end
+    json.sort_by { |hash| -hash['decide_rating'] }
+>>>>>>> master
   end
 
   def create_restaurant_yelp(hash)
@@ -123,13 +158,13 @@ class ResultsController < ApplicationController
   end
 
   def create_restaurant_zomato(hash)
+    first_result = hash.first
     new_restaurant = Restaurant.new(
-      yelp_id: hash["id"],
-      name: hash["name"],
-      description: hash["categories"][0]["title"],
-      location: hash[
-        "location"]["display_address"].join(", "),
-      ratinsg: hash["rating"]
+      yelp_id: first_result["restaurant"]["url"],
+      name: first_result["restaurant"]["name"],
+      description: first_result["restaurant"]["cuisines"],
+      location: first_result["restaurant"]["location"]["address"],
+      ratings: first_result["restaurant"]["user_rating"]["aggregate_rating"]
     )
     new_restaurant.save!
   end

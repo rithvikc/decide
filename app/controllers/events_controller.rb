@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     if @event.save
       cuisine_event_params(event_params)
     # @save_count == event_params[:cuisine_event_ids].count
-      redirect_to new_event_invitation_path(@event)
+      redirect_to event_path(@event)
     else
       render :new
     end
@@ -36,17 +36,23 @@ class EventsController < ApplicationController
     end
   end
 
+  def invite
+    @event = Event.find(params[:event_id])
+    User.invite!(email:email_params[:invite][:email])
+    redirect_to event_path(@event)
+  end
+
   private
 
   def cuisine_event_params(event_params)
     @save_count = 0
     event_params[:cuisine_event_ids].each do |id|
-        @cuisine_event = CuisineEvent.new
-        @cuisine = Cuisine.find(id.to_i)
-        @cuisine_event.cuisine = @cuisine
-        @cuisine_event.event = @event
-        @cuisine_event.save!
-        @save_count += 1
+      @cuisine_event = CuisineEvent.new
+      @cuisine = Cuisine.find(id.to_i)
+      @cuisine_event.cuisine = @cuisine
+      @cuisine_event.event = @event
+      @cuisine_event.save!
+      @save_count += 1
     end
   end
 
@@ -61,5 +67,9 @@ class EventsController < ApplicationController
   def create_invitations
     @event = Event.find(params[:id])
     @invitation = Invitation.new
+  end
+
+  def email_params
+    params.permit(invite: :email)
   end
 end

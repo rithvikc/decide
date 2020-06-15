@@ -12,25 +12,42 @@
 <div class="container mt-4 mb-4">
   <h5 class="text-center text-break"><i class="far fa-comment mr-3"></i><%= @event.description %></h5>
   <div class="mt-4 mb-4">
+
   <h6><strong>Invite friends</strong></h6>
+<<<<<<< HEAD
     <form class="input-group js-add-friend-form mt-4 mb-4" id="friends-form">
       <input type="email" id="friend-email" class="form-control rounded-decide" placeholder="Friend's email address">
       <div class="input-group-append">
         <input value="+" class="btn d-btn-dark" type="submit">
+=======
+  <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
+    <%= f.input :email, as: :string %>
+    <%= f.submit %>
+  <% end %>
+
+    <div class="input-group mt-4 mb-4" id="friends-form">
+      <input type="text" class="form-control rounded-decide friend-email" placeholder="Friend's email address">
+      <div class="input-group-append">
+        <input type="submit" value="+" class="btn d-btn-dark" id="js-add-friend-btn">
+>>>>>>> master
       </div>
     </form>
     <div class="list-friends">
     </div>
   </div>
+
+<div class="list-friends">
+</div>
+
   <div class="mt-4 mb-4">
     <h6><strong>Who's coming</strong></h6>
     <div class="d-flex flex-xl-wrap mt-4 mb-4 notification-container">
       <% @event.invitations.each do |i| %>
       <div class="notification mr-4 mb-4">
-        <% if i.status == "confirmed" %>
-          <%= image_tag i.user.avatar, alt: "user avatar", class: "avatar-large-confirmed" %>
+         <% if i.status == "confirmed" %>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-confirmed" %>
         <% else %>
-          <%= image_tag i.user.avatar, alt: "user avatar", class: "avatar-large-pending" %>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-pending" %>
         <% end %>
         <div class="notification-content">
           <p><small><%= i.user.email %></small></p>
@@ -42,5 +59,6 @@
   </div>
 </div>
 <%= javascript_pack_tag 'pages/new_invitation' %>
+
 
 
