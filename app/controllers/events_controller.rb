@@ -38,7 +38,9 @@ class EventsController < ApplicationController
 
   def invite
     @event = Event.find(params[:event_id])
-    User.invite!(email:email_params[:invite][:email])
+    @invited_list = []
+    User.invite!(email:email_params[:invite][:email], last_event:@event.id)
+    @invited_list << email_params[:invite][:email]
     redirect_to event_path(@event)
   end
 
@@ -58,6 +60,7 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:id])
+    @invited_list = ['lacy']
   end
 
   def event_params
