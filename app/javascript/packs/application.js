@@ -30,8 +30,13 @@ import { initPlaces } from '../plugins/init_gplaces_widget';
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initPlaces();
-  window.jQuery('select').select2({
-    width: '100%'
-  });
+  // window.jQuery('select').select2({
+  //   width: '100%'
+  // });
 })
 
+$(document).ready(function(){
+  $(".category-choice").click(function(){
+    $(this).toggleClass("active");
+  });
+});
