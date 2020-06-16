@@ -15,10 +15,10 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params.except(:cuisine_event_ids))
-    if @event.save
+    if @event.save!
       cuisine_event_params(event_params)
     # @save_count == event_params[:cuisine_event_ids].count
-      redirect_to event_path(@event)
+      redirect_to new_event_invitation_path(@event)
     else
       render :new
     end
@@ -34,6 +34,7 @@ class EventsController < ApplicationController
         image_url: helpers.asset_url('map-user-blue.png')
       }
     end
+    @decided = decided?
   end
 
   def invite
@@ -81,5 +82,9 @@ class EventsController < ApplicationController
 
   def email_params
     params.permit(invite: :email)
+  end
+
+  def decided?
+    false
   end
 end
