@@ -12,12 +12,11 @@ class InvitationsController < ApplicationController
     @user = current_user
     @invitation.user = @user
     @invitation.event = @event
-    unless @event.invitations.empty?
-      unless within_50km?(@invitation, @event)
-        flash[:notice] = "Your location is too far away!"
-        render :new and return
-      end
+    unless @event.invitations.empty? || within_50km?(@invitation, @event)
+      flash[:notice] = "Your location is too far away!"
+      render :new and return
     end
+    @invitation.status = "Confirmed"
     if @invitation.save
       EventChannel.broadcast_to(
         @event,

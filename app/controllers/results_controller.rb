@@ -29,7 +29,7 @@ class ResultsController < ApplicationController
       redirect_to event_result_path(@event, @result)
     else
       redirect_to event_path(@event)
-      flash[:notice] = "Sorry, we're too busy right now. Try again!"
+      flash[:notice] = "Sorry, we're too busy right now. Please try again!"
     end
   end
 
