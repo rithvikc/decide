@@ -49,9 +49,6 @@
   }
 }
 
-.form-post .select2{
-  margin-bottom: 2rem;
-}
 
 .form-control {
   border-radius: $d-border-radius;
@@ -62,9 +59,16 @@
 //   float: left;
 // }
 
+
+.form-row{
+  width:70%;
+}
+
+
 #invite_email {
   border-radius: 7px;
   width: 90%;
   font-size: normal;
   padding: 5px;
+
 }

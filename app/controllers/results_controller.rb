@@ -6,11 +6,15 @@ class ResultsController < ApplicationController
 
   def show
     @result = Result.find(params[:id])
+    @event = Event.find(params[:event_id])
+    @event.decided = true
+    @event.save!
   end
 
   def create
     @result = Result.new(result_params)
     @event = Event.find(params[:event_id])
+    @event.decided = true
     start_at = @event.start_at.to_i
     geo_center = find_geo_center(@event)
     lat = geo_center[:latitude]
@@ -21,8 +25,9 @@ class ResultsController < ApplicationController
     @restaurant = Restaurant.last
     @result.restaurant = @restaurant
     @result.event = @event
-    @result.save!
-    redirect_to event_result_path(@event, @result)
+    if @result.save!
+      redirect_to event_result_path(@event, @result)
+    end
   end
 
   def set_timezone(lat, long, start_at)

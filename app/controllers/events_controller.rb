@@ -15,10 +15,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params.except(:cuisine_event_ids))
-    if @event.save
+    @event.decided = false
+    if @event.save!
       cuisine_event_params(event_params)
     # @save_count == event_params[:cuisine_event_ids].count
-      redirect_to event_path(@event)
+      redirect_to new_event_invitation_path(@event)
     else
       render :new
     end
@@ -26,13 +27,17 @@ class EventsController < ApplicationController
 
   def show
     # @invitation = Invitation.new
-    @markers = @event.invitations.map do |i|
-      {
-        lat: i.latitude,
-        lng: i.longitude,
-        # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
-        image_url: helpers.asset_url('map-user-blue.png')
-      }
+    if @event.result
+      redirect_to event_result_path(@event.result) and return
+    else
+      @markers = @event.invitations.map do |i|
+        {
+          lat: i.latitude,
+          lng: i.longitude,
+          # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
+          image_url: helpers.asset_url('map-user-blue.png')
+        }
+      end
     end
   end
 
@@ -43,10 +48,12 @@ class EventsController < ApplicationController
       flash[:notice] = "You're already attending this event!"
     elsif @user.present? && @user.email != current_user.email
       @user.invite![last_event: @event.id]
+      event_channel
       flash[:notice] = "You just invited #{@user.name}!"
       @user
     else
       User.invite!(email: email_params[:invite][:email], last_event: @event.id)
+      event_channel
       flash[:notice] = "Your invitation has been sent!"
     end
     redirect_to event_path(@event)
@@ -81,5 +88,12 @@ class EventsController < ApplicationController
 
   def email_params
     params.permit(invite: :email)
+  end
+
+  def event_channel
+    EventChannel.broadcast_to(
+      @event,
+      render_to_string(partial: "shared/invited", locals: { event: @event })
+    )
   end
 end

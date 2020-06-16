@@ -26,13 +26,16 @@ require("channels")
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 import { initPlaces } from '../plugins/init_gplaces_widget';
+import { initEventCable } from '../channels/event_channel';
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initPlaces();
-  // window.jQuery('select').select2({
-  //   width: '100%'
-  // });
+  initEventCable();
+  window.jQuery('select').select2({
+    width: '100%',
+    placeholder: "100's of cuisines to choose from!"
+  });
 })
 
 $(document).ready(function(){
@@ -40,3 +43,5 @@ $(document).ready(function(){
     $(this).toggleClass("active");
   });
 });
+
+
