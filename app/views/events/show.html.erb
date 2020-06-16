@@ -5,9 +5,10 @@
     <p><i class="far fa-clock mr-3"></i><%= @event.start_at.strftime("%I:%M %P") %></p>
   </div>
 </div>
-<div id="map" class="map-overlap"  style="width: 100%; height: 12em;"
+  <div id="map" class="map-overlap"  style="width: 100%; height: 12em;"
   data-markers="<%= @markers.to_json %>"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
 </div>
 <div class="container mt-4 mb-4">
   <h5 class="text-center text-break"><i class="far fa-comment mr-3"></i><%= @event.description %></h5>
