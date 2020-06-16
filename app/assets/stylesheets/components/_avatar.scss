@@ -3,15 +3,17 @@
   border-radius: 50%;
 }
 .avatar-large-confirmed {
-  width: 56px;
+  width: 60px;
   border-radius: 50%;
-  border: medium solid $d-green-t;
+  border: medium solid $d-white;
+
 }
 
 .avatar-large-pending {
-  width: 56px;
-  border-radius: 50%;
-  border: medium solid $d-red-t;
+  // width: 60px;
+  // border-radius: 50%;
+  // border: medium solid $d-white;
+  filter: opacity(0.5);
 }
 
 .avatar-bordered {
@@ -32,6 +34,20 @@
   // overflow-y: scroll;
 }
 
+.marker {
+  width: 50px;
+  height: 50px;
+  background: orange;
+  border-radius: 50%;
+  font-weight: bolder;
+  line-height: 44px;
+  border: 3px solid white;
+  h3 {
+    text-align: center;
+    line-height: 42px
+  }
+}
+
 .notification {
   padding: 0px, 25px, 25px, 25px;
   // background-color: $d-white;
@@ -47,6 +63,8 @@
   border-radius: 10px;
   text-align: center;
 }
+
+
 
 .notification .notification-content {
   // padding: 0 0px;

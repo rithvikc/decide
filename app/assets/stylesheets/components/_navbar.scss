@@ -1,22 +1,31 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: $gray;
+  background: transparent;
+  position: fixed;
+  z-index: 10;
+
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
+  position: relative;
+  z-index: 10;
 }
 
 .navbar-lewagon .navbar-brand img {
   height: 40px;
+  position: relative;
+  z-index: 10;
 }
 
 .navbar {
-  background: $gray;
+  background: transparent;
   padding-left: auto;
   padding-right: auto;
   h3 {
     color: $d-white;
   }
+  position: fixed;
+  z-index: 10;
 }
 

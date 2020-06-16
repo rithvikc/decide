@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl';
+import "mapbox-gl/dist/mapbox-gl.css"
 
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
@@ -7,8 +8,14 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/arie9785/ckbenxi9v1mkt1imyv3i6dz0e'
+      style: 'mapbox://styles/arie9785/ckbenxi9v1mkt1imyv3i6dz0e',
+      attributionControl: false,
+      interactive: false,
     });
+
+    map.on("load", () => {
+      map.resize()
+    })
 
     const markers = JSON.parse(mapElement.dataset.markers);
     markers.forEach((marker) => {
