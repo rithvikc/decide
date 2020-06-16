@@ -39,7 +39,8 @@ event_time = 1000000000
   new_event = Event.new(
     name: event_name_array[array_num],
     description: event_description_array[array_num],
-    start_at: "2020-06-21 08:00:00")
+    start_at: "2020-06-21 08:00:00",
+    decided: false)
   new_event.save!
   array_num += 1
   event_time += 1000000000
