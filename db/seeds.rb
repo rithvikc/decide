@@ -48,8 +48,7 @@ p "success!"
 
 # Create cuisines
 array_num = 0
-cuisines_array = %w[Cafe Pizza Burgers Chinese Mexican Indian Thai Japanese Italian Asian Middle-Eastern Vegan Vietnamese Portugese Modern\ Australian Malaysian Korean\ BBQ Kebab Iranian Indonesian Ice\ Cream Salad French Frozen\ Yogurt Ethiopian Fish\ and\ Chips Ramen Sri\ Lankan Sushi Turkish Vegetarian Afghan African BBQ Bakery Bangladeshi British Crepes Desserts]
-cuisines_array = cuisines_array.sort
+cuisines_array = ["Afghan", "African", "Asian", "BBQ", "Bakery", "Bangladeshi", "British", "Burgers", "Cafe", "Chinese", "Crepes", "Desserts", "Ethiopian", "Fish and Chips", "French", "Frozen Yogurt", "Ice Cream", "Indian", "Indonesian", "Iranian", "Italian", "Japanese", "Kebab", "Korean BBQ", "Malaysian", "Mexican", "Middle-Eastern", "Modern Australian", "Pizza", "Portugese", "Ramen", "Salad", "Sri Lankan", "Sushi", "Thai", "Turkish", "Vegan", "Vegetarian", "Vietnamese"]
 cuisines_len = cuisines_array.length.to_i
 p "creating #{cuisines_len} cuisines!"
 
