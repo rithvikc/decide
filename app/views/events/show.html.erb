@@ -32,13 +32,13 @@
     <div class="d-flex flex-xl-wrap mt-4 mb-4 notification-container">
       <% @event.invitations.each do |i| %>
       <div class="notification mr-4 mb-4">
-         <% if i.status == "confirmed" %>
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-confirmed" %>
+        <% if i.status == "accepted" %>
+          <%= image_tag "assets/images/greencircle.png", alt: "user avatar", class: "avatar-large-confirmed" %>
         <% else %>
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-pending" %>
         <% end %>
         <div class="notification-content">
-          <p><small><%= i.user.email %></small></p>
+          <p><small><%= i.status %>. <%= i.user.email %></small></p>
         </div>
       </div>
       <% end %>
