@@ -16,8 +16,10 @@
 
   <h6><strong>Invite friends</strong></h6>
   <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
-    <%= f.input :email, as: :string, input_html: { class: 'friend-email', placeholder: "Friend's email address" } %>
-    <%= f.submit 'Invite friend' %>
+    <%= f.input :email, label: false, wrapper_html: {class: "form-inline justify-content-between"} do %>
+      <%= f.input_field :email, as: :email, placeholder: "Friend's email address" %>
+      <%= f.button :submit, '+', class:"btn d-btn-dark", label_html: { class: 'input-group-append'} %>
+    <% end %>
   <% end %>
 
 
@@ -31,13 +33,13 @@
     <div class="d-flex flex-xl-wrap mt-4 mb-4 notification-container">
       <% @event.invitations.each do |i| %>
       <div class="notification mr-4 mb-4">
-         <% if i.status == "confirmed" %>
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-confirmed" %>
+        <% if i.status == "accepted" %>
+          <%= image_tag "assets/images/greencircle.png", alt: "user avatar", class: "avatar-large-confirmed" %>
         <% else %>
           <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-pending" %>
         <% end %>
         <div class="notification-content">
-          <p><small><%= i.user.email %></small></p>
+          <p><small><%= i.status %>. <%= i.user.email %></small></p>
         </div>
       </div>
       <% end %>

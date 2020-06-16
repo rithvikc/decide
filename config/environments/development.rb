@@ -38,7 +38,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Change to :letter_opener for testing
-  config.action_mailer.delivery_method= :letter_opener
+  config.action_mailer.delivery_method= :smtp
   #:smtp
 
   config.action_mailer.smtp_settings = {
