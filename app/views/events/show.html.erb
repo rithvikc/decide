@@ -44,6 +44,10 @@
       </div>
       <% end %>
     </div>
-     <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-dark p-2", method: :post %>
+    <% if @decided == false %>
+      <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-dark p-2", method: :post %>
+    <% else %>
+      <%= button_to "Check out!", event_results_path(@event), class: "btn btn-block d-btn-dark p-2", method: :post %>
+    <% end %>
   </div>
 </div>
