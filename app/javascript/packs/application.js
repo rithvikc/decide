@@ -33,6 +33,7 @@ document.addEventListener('turbolinks:load', () => {
   window.jQuery('select').select2({
     width: '100%',
     placeholder: "100's of cuisines to choose from!"
+
   });
 })
 

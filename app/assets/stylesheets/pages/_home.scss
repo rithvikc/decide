@@ -1,6 +1,11 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: $bg;
+  color:black;
+}
+h2{
+  margin-top: 20px;
 }
 
 ::-webkit-scrollbar {
@@ -27,14 +32,14 @@ background-color: transparent;
 .jumbotron {
   font-family: 'Montserrat', sans-serif;
   padding: 14vh 0;
-  background-color: $gray;
+  background-color: $bg;
   background-size: cover;
   text-align: center;
   color: $d-white;
   position: relative;
   border-radius: 0px;
   h2 {
-    color: $d-white;
+    color: black;
   }
 }
 
