@@ -1,4 +1,4 @@
-<div class="div-shape-sm div-gradient">
+<div class="div-shape-sm ">
   <div class="container">
     <h2 class="mb-2"><%= @event.name %></h2>
   </div>
@@ -11,11 +11,12 @@
       <%= simple_form_for [@event, @invitation] do |f| %>
     <div class="form-inputs">
       <%= f.input :location, input_html: {id:"location"}, placeholder: "Where are you?" %>
-      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false,  label: "What do you want to eat?" %>
+      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false,  label: "What do you want to eat?",input_html: { data: {:placeholder => 'Choose a cuisine'} } %>
     </div>
   <!--   <textarea class="js-friends-value"></textarea> -->
-    <div class="form-actions">
-        <%= f.button :submit, class:'btn btn-block d-btn-dark p-2'%>
-    </div>
-  <% end %>
 </div>
+<div class="form-actions">
+    <%= f.button :submit, class:'submit'%>
+</div>
+
+  <% end %>

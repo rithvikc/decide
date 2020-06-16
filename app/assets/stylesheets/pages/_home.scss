@@ -2,10 +2,11 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: $bg;
-  color:black;
+  color: white;
 }
 h2{
   margin-top: 20px;
+  color: $d-white;
 }
 
 ::-webkit-scrollbar {
@@ -39,7 +40,7 @@ background-color: transparent;
   position: relative;
   border-radius: 0px;
   h2 {
-    color: black;
+    color: $d-white;
   }
 }
 
@@ -56,16 +57,17 @@ background-color: transparent;
 .button {
   display: inline-block;
   border: 2px solid #fff;
+  border-color: $d-white;
   padding: 10px 20px;
-  color: #fff;
+  color: $d-white;
   text-decoration: none;
   transition: 0.3s;
   margin-top: 1rem;
 }
 
 .button:hover {
-  background: #fff;
-  color: #000;
+  background: $d-white;
+  color: $d-white;
 }
 
 .btn-group-vertical a, .btn-group-vertical button {

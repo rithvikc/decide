@@ -26,15 +26,12 @@ require("channels")
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 import { initPlaces } from '../plugins/init_gplaces_widget';
+import { initSelect2 } from '../plugins/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initPlaces();
-  window.jQuery('select').select2({
-    width: '100%',
-    placeholder: "100's of cuisines to choose from!"
-
-  });
+  initSelect2();
 })
 
 $(document).ready(function(){
