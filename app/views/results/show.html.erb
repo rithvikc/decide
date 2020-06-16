@@ -22,7 +22,7 @@
       <% @result.event.invitations.each do |i| %>
       <div class="notification mr-4 mb-4">
         <% if i.status != "confirmed" %>
-          <%= image_tag i.user.avatar, alt: "user avatar", class: "avatar-large-confirmed" %>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-confirmed" %>
         <% end %>
         <div class="notification-content">
           <p><small><%= i.user.email %></small></p>
