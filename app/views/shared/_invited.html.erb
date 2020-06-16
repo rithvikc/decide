@@ -1,0 +1,15 @@
+<% event.invited_users.each do |user| %>
+<div class="notification mr-4 mb-4">
+  <% if user.invitation_accepted_at %>
+  <%= image_tag "greencircle.png", alt: "user avatar", class: "avatar-large-confirmed" %>
+  <div class="notification-content">
+    <p><small>Accepted. <%= user.email %></small></p>
+  </div>
+  <% else %>
+  <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", alt: "user avatar", class: "avatar-large-pending" %>
+  <div class="notification-content">
+    <p><small>Pending. <%= user.email %></small></p>
+  </div>
+  <% end %>
+</div>
+<% end %>

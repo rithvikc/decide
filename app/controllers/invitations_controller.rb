@@ -13,6 +13,10 @@ class InvitationsController < ApplicationController
     @invitation.user = @user
     @invitation.event = @event
     if @invitation.save
+      EventChannel.broadcast_to(
+        @event,
+        render_to_string(partial: "shared/invited", locals: { event: @event })
+      )
       redirect_to event_path(@invitation[:event_id])
     else
       render :new
