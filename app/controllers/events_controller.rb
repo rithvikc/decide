@@ -42,21 +42,23 @@ class EventsController < ApplicationController
   end
 
   def invite
-    @user = User.find_by({ email: email_params[:invite][:email] })
+    @user = User.find_by({ email: email_params[:invite][:email].downcase })
     @event = Event.find(params[:event_id])
     if @user.present? && @user.email == current_user.email
-      flash[:notice] = "You're already attending this event!"
-    elsif @user.present? && @user.email != current_user.email
-      @user.invite![last_event: @event.id]
+      flash[:notice] = "You're already attending this event"
+    elsif @event.users.include?(@user)
+      flash[:notice] = "You've already invited #{@user.email}"
+    elsif @user.present? && User.all.include?(@user)
+      @user.last_event = @event.id
+      @user.invite![email: @user.email, last_event: @event.id]
       event_channel
-      flash[:notice] = "You just invited #{@user.name}!"
-      @user
+      flash[:notice] = "Your invitation has been sent!"
     else
-      User.invite!(email: email_params[:invite][:email], last_event: @event.id)
+      User.invite!(email: email_params[:invite][:email].downcase, last_event: @event.id)
       event_channel
       flash[:notice] = "Your invitation has been sent!"
     end
-    redirect_to event_path(@event)
+    # redirect_to event_path(@event)
   end
 
   private
