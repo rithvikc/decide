@@ -1,13 +1,9 @@
 .navbar-lewagon {
   justify-content: space-between;
-<<<<<<< HEAD
   background: $bg;
-=======
   background: transparent;
-  position: fixed;
+  // position: fixed;
   z-index: 10;
-
->>>>>>> master
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -16,24 +12,30 @@
   z-index: 10;
 }
 
-.navbar-lewagon .navbar-brand img {
-  height: 40px;
-  position: relative;
+.navbar-lewagon{
   z-index: 10;
 }
 
+
+.navbar-brand {
+  width: 110px;
+  position: relative;
+}
+
+.dropdown-menu-left{
+  left:10px;
+}
 .navbar {
-<<<<<<< HEAD
-  background: $bg;
-=======
   background: transparent;
->>>>>>> master
   padding-left: auto;
   padding-right: auto;
   h3 {
     color: $d-white;
   }
-  position: fixed;
+  // position: fixed;
   z-index: 10;
 }
 
+.navbar-nav .dropdown-menu{
+
+}

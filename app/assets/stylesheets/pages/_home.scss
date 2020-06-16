@@ -4,9 +4,14 @@ html, body {
   background-color: $bg;
   color: white;
 }
+
 h2{
   margin-top: 20px;
   color: $d-white;
+  font-size: 36px;
+}
+a{
+  color: #3b3b3b;
 }
 
 .mapboxgl-ctrl-logo {
@@ -45,6 +50,7 @@ h2{
   border-radius: 0px;
   h2 {
     color: $d-white;
+    padding:2px;
   }
 }
 
@@ -80,6 +86,7 @@ h2{
 
 .card{
   border-radius: 8px;
+  background-color: $bg;
 }
 
 .rounded-decide {
