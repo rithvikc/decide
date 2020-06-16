@@ -1,9 +1,13 @@
 .navbar-lewagon {
   justify-content: space-between;
+<<<<<<< HEAD
+  background: $bg;
+=======
   background: transparent;
   position: fixed;
   z-index: 10;
 
+>>>>>>> master
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -19,7 +23,11 @@
 }
 
 .navbar {
+<<<<<<< HEAD
+  background: $bg;
+=======
   background: transparent;
+>>>>>>> master
   padding-left: auto;
   padding-right: auto;
   h3 {

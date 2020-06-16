@@ -1,6 +1,12 @@
 html, body {
   margin: 0;
   padding: 0;
+  background-color: $bg;
+  color: white;
+}
+h2{
+  margin-top: 20px;
+  color: $d-white;
 }
 
 .mapboxgl-ctrl-logo {
@@ -31,7 +37,7 @@ html, body {
 .jumbotron {
   font-family: 'Montserrat', sans-serif;
   padding: 14vh 0;
-  background-color: $gray;
+  background-color: $bg;
   background-size: cover;
   text-align: center;
   color: $d-white;
@@ -55,16 +61,17 @@ html, body {
 .button {
   display: inline-block;
   border: 2px solid #fff;
+  border-color: $d-white;
   padding: 10px 20px;
-  color: #fff;
+  color: $d-white;
   text-decoration: none;
   transition: 0.3s;
   margin-top: 1rem;
 }
 
 .button:hover {
-  background: #fff;
-  color: #000;
+  background: $d-white;
+  color: $d-white;
 }
 
 .btn-group-vertical a, .btn-group-vertical button {
