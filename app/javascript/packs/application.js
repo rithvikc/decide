@@ -30,9 +30,10 @@ import { initPlaces } from '../plugins/init_gplaces_widget';
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initPlaces();
-  // window.jQuery('select').select2({
-  //   width: '100%'
-  // });
+  window.jQuery('select').select2({
+    width: '100%',
+    placeholder: "100's of cuisines to choose from!"
+  });
 })
 
 $(document).ready(function(){
@@ -40,3 +41,5 @@ $(document).ready(function(){
     $(this).toggleClass("active");
   });
 });
+
+

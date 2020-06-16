@@ -49,9 +49,6 @@
   }
 }
 
-.form-post .select2{
-  margin-bottom: 2rem;
-}
 
 .form-control {
   border-radius: $d-border-radius;
@@ -61,3 +58,7 @@
 // .input-append input {
 //   float: left;
 // }
+
+.form-row{
+  width:70%;
+}

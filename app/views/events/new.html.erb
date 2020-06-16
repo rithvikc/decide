@@ -10,7 +10,7 @@
         <div class="form-row">
         <%= f.input :name, input_html: {maxlength: 24, size: 40}, placeholder: "Give your event a name", class: "col-xs-6" %>
         </div>
-        <%= f.association :cuisine_events, as: :check_boxes, collection: Cuisine.all, input_html: { multiple: true }, include_hidden: false %>
+        <%= f.association :cuisine_events, :label => "Where would you like to eat?", collection: Cuisine.all, input_html: { multiple: true }, include_hidden: false %>
 
         <!-- <div class="category-choices">
           <% Cuisine.all.each do |cuisine| %>
