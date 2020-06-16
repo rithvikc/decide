@@ -113,18 +113,18 @@ var = 0
 end
 p "success!"
 
-p "Creating 4 results"
-var = 1
+# p "Creating 4 results"
+# var = 1
 
-4.times do
-  new_result = Result.new
-  event = Event.find(var)
-  new_result.event = event
-  new_result.restaurant = Restaurant.find(var)
-  new_result.save!
-  var += 1
-end
-p "success!"
+# 4.times do
+#   new_result = Result.new
+#   event = Event.find(var)
+#   new_result.event = event
+#   new_result.restaurant = Restaurant.find(var)
+#   new_result.save!
+#   var += 1
+# end
+# p "success!"
 p "Let's go DREAM TEAM!"
 
 
