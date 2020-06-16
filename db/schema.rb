@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_06_16_035445) do
     t.string "token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "decided"
+    t.boolean "decided", default: false
   end
 
   create_table "invitations", force: :cascade do |t|

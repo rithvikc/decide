@@ -1,38 +1,37 @@
-<div class="div-shape div-gradient">
-  <div class="container">
-    <h2 class="mb-2 text-break"><%= @event.name %></h2>
-    <p><i class="fas fa-calendar-day mr-3" ></i><%= @event.start_at.strftime("%A, %b %d") %></p>
-    <p><i class="far fa-clock mr-3"></i><%= @event.start_at.strftime("%I:%M %P") %></p>
-  </div>
-</div>
-  <div id="map" class="map-overlap"  style="width: 100%; height: 12em;"
-  data-markers="<%= @markers.to_json %>"
-  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
-</div>
-<div class="container mt-4 mb-4">
-  <h5 class="text-center text-break"><i class="far fa-comment mr-3"></i><%= @event.description %></h5>
-  <div class="mt-4 mb-4">
-
-  <h6><strong>Invite friends</strong></h6>
-  <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
-    <%= f.input :email, label: false, wrapper_html: {class: "form-inline justify-content-between"} do %>
-      <%= f.input_field :email, as: :email, placeholder: "Friend's email address" %>
-      <%= f.button :submit, '+', class:"btn d-btn-dark", label_html: { class: 'input-group-append'} %>
-    <% end %>
-  <% end %>
-
-
-  <div class="mt-4 mb-4">
-    <h6><strong>Who's invited</strong></h6>
-    <div class="list-friends d-flex flex-xl-wrap mt-4 mb-4 notification-container" id="invite-container" data-event-id="<%= @event.id %>" >
-      <%= render 'shared/invited', event:@event %>
+<div class="mobile-frame row">
+  <div class="col-md-6">
+    <div class="map-event">
+      <div id="map"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
     </div>
-
-    <% if @event.decided == false %>
-      <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-dark p-2", method: :post %>
-    <% else %>
-      <%= button_to "Check out!", event_result_path(@event, @event.result), class: "btn btn-block d-btn-dark p-2", method: :get %>
-    <% end %>
+  </div>
+  <div class="event-content col-md-6">
+    <div class="bgc">
+      <div class="container pt-3">
+        <%= image_tag("logo-crop.png", class: "logo-body mb-3") %>
+        <h2 class="mb-3"><strong><%= @event.name %></strong></h2>
+        <h6><em>On <%= @event.start_at.strftime("%A, %b %d") %> at </i><%= @event.start_at.strftime("%I:%M %P") %></em></h6>
+        <p class="mb-4"><%= @event.description %></p>
+        <h6 class="mb-3"><strong>Invite friends</strong></h6>
+        <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
+          <%= f.input :email, label: false, wrapper_html: {class: "d-flex justify-content-between"} do %>
+            <%= f.input_field :email, as: :email, placeholder: "  Friend's email address", class: "email-input-form" %>
+            <%= f.button :submit, '+', class: "email-input-btn", label_html: { class: 'input-group-append'} %>
+          <% end %>
+        <% end %>
+        <h6 class="mb-3"><strong>Who's coming</strong></h6>
+        <div class="d-flex mb-3 notification-container" id="invite-container" data-event-id="<%= @event.id %>">
+            <%= render 'shared/marker', event:@event %>
+        </div>
+        <% if @event.decided == false %>
+          <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-light p-2", method: :post %>
+        <% else %>
+          <%= button_to "See the decision!", event_results_path(@event, @even.result), class: "btn btn-block d-btn-light p-2", method: :get %>
+      <% end %>
+      </div>
+    </div>
   </div>
 </div>
+
