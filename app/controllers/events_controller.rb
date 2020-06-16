@@ -42,7 +42,7 @@ class EventsController < ApplicationController
     if @user.present? && @user.email == current_user.email
       flash[:notice] = "You're already attending this event!"
     elsif @user.present? && @user.email != current_user.email
-      User.invite!(email: @user.email, last_event: @event.id)
+      @user.invite![last_event: @event.id]
       flash[:notice] = "You just invited #{@user.name}!"
       @user
     else
