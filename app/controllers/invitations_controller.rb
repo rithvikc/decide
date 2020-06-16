@@ -12,6 +12,12 @@ class InvitationsController < ApplicationController
     @user = current_user
     @invitation.user = @user
     @invitation.event = @event
+    unless @event.invitations.empty?
+      unless within_50km?(@invitation, @event)
+        flash[:notice] = "Your location is too far away!"
+        render :new and return
+      end
+    end
     if @invitation.save
       EventChannel.broadcast_to(
         @event,
@@ -35,5 +41,20 @@ class InvitationsController < ApplicationController
 
   def invitation_params
     params.require(:invitation).permit(:location, :cuisine_id)
+  end
+
+  def within_50km?(invitation, event)
+    coords_array = []
+    result = Geocoder.search(invitation.location)
+    result_coords = result.first.coordinates
+    event.invitations.each do |i|
+      coords_array << [i.latitude, i.longitude]
+    end
+    geo_center = Geocoder::Calculations.geographic_center(coords_array)
+    if Geocoder::Calculations.distance_between(geo_center, result_coords) <= 100
+      return true
+    else
+      return false
+    end
   end
 end

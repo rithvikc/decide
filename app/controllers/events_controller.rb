@@ -49,7 +49,7 @@ class EventsController < ApplicationController
     elsif @user.present? && @user.email != current_user.email
       @user.invite![last_event: @event.id]
       event_channel
-      flash[:notice] = "You just invited #{@user.name}!"
+      flash[:notice] = "Your invitation has been sent!"
       @user
     else
       User.invite!(email: email_params[:invite][:email], last_event: @event.id)

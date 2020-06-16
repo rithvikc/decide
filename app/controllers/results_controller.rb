@@ -25,8 +25,11 @@ class ResultsController < ApplicationController
     @restaurant = Restaurant.last
     @result.restaurant = @restaurant
     @result.event = @event
-    if @result.save!
+    if @result.save
       redirect_to event_result_path(@event, @result)
+    else
+      redirect_to event_path(@event)
+      flash[:notice] = "Sorry, we're too busy right now. Try again!"
     end
   end
 
