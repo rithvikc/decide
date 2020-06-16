@@ -38,7 +38,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Change to :letter_opener for testing
-  config.action_mailer.delivery_method= :smtp
+  config.action_mailer.delivery_method= :letter_opener
+  #:smtp
 
   config.action_mailer.smtp_settings = {
   :address              => "smtp.gmail.com",
