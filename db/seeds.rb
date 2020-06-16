@@ -47,11 +47,12 @@ end
 p "success!"
 
 # Create cuisines
-p "creating 4 cuisines!"
 array_num = 0
-cuisines_array = ["Pizza", "Burgers", "Chinese", "Mexican"]
+cuisines_array = ["Afghan", "African", "Asian", "BBQ", "Bakery", "Bangladeshi", "British", "Burgers", "Cafe", "Chinese", "Crepes", "Desserts", "Ethiopian", "Fish and Chips", "French", "Frozen Yogurt", "Ice Cream", "Indian", "Indonesian", "Iranian", "Italian", "Japanese", "Kebab", "Korean BBQ", "Malaysian", "Mexican", "Middle-Eastern", "Modern Australian", "Pizza", "Portugese", "Ramen", "Salad", "Sri Lankan", "Sushi", "Thai", "Turkish", "Vegan", "Vegetarian", "Vietnamese"]
+cuisines_len = cuisines_array.length.to_i
+p "creating #{cuisines_len} cuisines!"
 
-4.times do
+until array_num == cuisines_len
   new_cuisine = Cuisine.new(name: cuisines_array[array_num])
   new_cuisine.save!
   array_num += 1
