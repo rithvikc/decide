@@ -26,12 +26,17 @@ require("channels")
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 import { initPlaces } from '../plugins/init_gplaces_widget';
+
 import { initSelect2 } from '../plugins/init_select2';
+
+import { initEventCable } from '../channels/event_channel';
+
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initPlaces();
   initSelect2();
+  initEventCable();
 })
 
 $(document).ready(function(){

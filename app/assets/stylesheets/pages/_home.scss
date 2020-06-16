@@ -9,26 +9,30 @@ h2{
   color: $d-white;
 }
 
-::-webkit-scrollbar {
-width: 8px;
-height: 8px;
+.mapboxgl-ctrl-logo {
+    display: none !important;
 }
 
-::-webkit-scrollbar-track-piece {
-background-color: $d-black-t1;
--webkit-border-radius: 6px;
-}
+// ::-webkit-scrollbar {
+// width: 8px;
+// height: 8px;
+// }
+
+// ::-webkit-scrollbar-track-piece {
+// background-color: $d-black-t1;
+// -webkit-border-radius: 6px;
+// }
 
 
-::-webkit-scrollbar-button:start:decrement,
-::-webkit-scrollbar-button:end:increment  {
-height: 30px;
-display: block;
-background-color: transparent;
-}
+// ::-webkit-scrollbar-button:start:decrement,
+// ::-webkit-scrollbar-button:end:increment  {
+// height: 30px;
+// display: block;
+// background-color: transparent;
+// }
 
-.container {
-}
+// .container {
+// }
 
 .jumbotron {
   font-family: 'Montserrat', sans-serif;
@@ -90,4 +94,16 @@ background-color: transparent;
 .fill {
     min-height: 100vh;
     height: 100vh;
+}
+
+.mobile-frame {
+  // max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.logo-body {
+  height: 30px;
+  // filter: invert(1);
+  margin-left: 2px;
 }

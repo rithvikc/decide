@@ -7,4 +7,10 @@ class Event < ApplicationRecord
   has_many :cuisines, through: :cuisine_events
 
   validates :name, :start_at, presence: true
+
+  def invited_users
+    relation_a = User.where(last_event: id).to_a
+    relation_b = users.to_a
+    (relation_a + relation_b).uniq(&:id)
+  end
 end
