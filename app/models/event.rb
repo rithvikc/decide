@@ -15,6 +15,6 @@ class Event < ApplicationRecord
   end
 
   def users_pending_invitation
-    User.where(last_event: id)
+    User.where(last_event: id, invitation_accepted_at: nil)
   end
 end

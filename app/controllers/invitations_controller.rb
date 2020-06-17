@@ -20,6 +20,7 @@ class InvitationsController < ApplicationController
     end
     @invitation.status = "Confirmed"
     if @invitation.save
+      @event.reload
       EventChannel.broadcast_to(
         @event,
         render_to_string(partial: "shared/invited", locals: { event: @event })
