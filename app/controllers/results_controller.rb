@@ -171,7 +171,7 @@ class ResultsController < ApplicationController
       location: hash[
         "location"]["display_address"].join(", "),
       ratings: hash["rating"],
-      price: hash["price"].size,
+      # price: hash["price"].size,
       image_url: hash["image_url"],
       latitude: hash["coordinates"]["latitude"],
       longitude: hash["coordinates"]["longitude"]
@@ -187,7 +187,7 @@ class ResultsController < ApplicationController
       description: first_result["restaurant"]["cuisines"],
       location: first_result["restaurant"]["location"]["address"],
       ratings: first_result["restaurant"]["user_rating"]["aggregate_rating"],
-      price: first_result["restaurant"]["price_range"],
+      # price: first_result["restaurant"]["price_range"],
       image_url: first_result["restaurant"]["featured_image"],
       latitude: first_result["restaurant"]["location"]["latitude"],
       longitude: first_result["restaurant"]["location"]["longitude"]
