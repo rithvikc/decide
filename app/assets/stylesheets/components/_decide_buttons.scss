@@ -27,7 +27,8 @@
 }
 
 .email-input-btn {
-    font-weight: bold;
+    font-weight: bolder;
+    text-align: center;
     color: $d-body;
     background-color: $d-white;
     // border-color: $d-white;
@@ -35,5 +36,5 @@
     border-bottom-right-radius: 10px;
     border-top-left-radius: 0px !important;
     border-bottom-left-radius: 0px !important;
-    width: 20%;
+    width: 5%;
 }

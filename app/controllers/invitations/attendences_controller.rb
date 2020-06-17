@@ -1,7 +1,7 @@
 class Invitations::AttendencesController < ApplicationController
   def destroy
     @event = Event.find(params[:event_id])
-    current_user.set_status_for(@event, "Cancelled")
+    current_user.set_status_for(@event, "Declined")
     redirect_to event_path(@event)
   end
 
