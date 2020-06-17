@@ -6,6 +6,6 @@ class Invitation < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_location?
 
   def cancelled?
-    status == "Cancelled"
+    status == "Declined"
   end
 end
