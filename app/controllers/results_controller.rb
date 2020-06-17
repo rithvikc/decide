@@ -5,9 +5,9 @@ class ResultsController < ApplicationController
   require 'net/http'
 
   def show
-    @result = Result.find(params[:id])
     @event = Event.find(params[:event_id])
-    @restaurant = @result.restaurant
+    @result = @event.result
+    @restaurant = @event.result.restaurant
     @event.decided = true
     @event.save!
     @markers = @event.invitations.map do |i|
@@ -165,14 +165,14 @@ class ResultsController < ApplicationController
 
   def create_restaurant_yelp(hash)
     new_restaurant = Restaurant.new(
-      yelp_id: hash["url"],
+      # yelp_id: hash["url"],
       name: hash["name"],
       description: hash["categories"][0]["title"],
       location: hash[
         "location"]["display_address"].join(", "),
       ratings: hash["rating"],
       # price: hash["price"].size,
-      image_url: hash["image_url"],
+      # image_url: hash["image_url"],
       latitude: hash["coordinates"]["latitude"],
       longitude: hash["coordinates"]["longitude"]
     )
@@ -182,13 +182,13 @@ class ResultsController < ApplicationController
   def create_restaurant_zomato(hash)
     first_result = hash.first
     new_restaurant = Restaurant.new(
-      yelp_id: first_result["restaurant"]["url"],
+      # yelp_id: first_result["restaurant"]["url"],
       name: first_result["restaurant"]["name"],
       description: first_result["restaurant"]["cuisines"],
       location: first_result["restaurant"]["location"]["address"],
       ratings: first_result["restaurant"]["user_rating"]["aggregate_rating"],
       # price: first_result["restaurant"]["price_range"],
-      image_url: first_result["restaurant"]["featured_image"],
+      # image_url: first_result["restaurant"]["featured_image"],
       latitude: first_result["restaurant"]["location"]["latitude"],
       longitude: first_result["restaurant"]["location"]["longitude"]
     )
