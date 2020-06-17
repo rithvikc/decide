@@ -19,6 +19,7 @@ class EventsController < ApplicationController
     if @event.save!
       cuisine_event_params(event_params)
     # @save_count == event_params[:cuisine_event_ids].count
+
       redirect_to new_event_invitation_path(@event)
     else
       render :new

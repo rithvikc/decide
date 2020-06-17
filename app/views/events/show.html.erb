@@ -23,7 +23,7 @@
         <% end %>
         <h6 class="mb-3"><strong>Who's coming</strong></h6>
         <div class="d-flex mb-3 notification-container" id="invite-container" data-event-id="<%= @event.id %>">
-            <%= render 'shared/marker', event:@event %>
+            <%= render 'shared/invited', event:@event %>
         </div>
         <% if @event.decided == false %>
           <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-light p-2", method: :post %>
