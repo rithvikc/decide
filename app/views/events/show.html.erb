@@ -25,11 +25,18 @@
         <div class="d-flex mb-3 notification-container" id="invite-container" data-event-id="<%= @event.id %>">
             <%= render 'shared/invited', event:@event %>
         </div>
+
+        <% if @invitation.cancelled? %>
+          <%= link_to "Join!", event_invitations_attendences_path(@event), method: :post %>
+        <% else %>
+          <%= link_to "Cannot Attend!", event_invitations_attendence_path(@event), method: :delete %>
+        <% end %>
+
         <% if @event.decided == false %>
           <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-light p-2", method: :post %>
         <% else %>
           <%= button_to "See the decision!", event_results_path(@event, @even.result), class: "btn btn-block d-btn-light p-2", method: :get %>
-      <% end %>
+        <% end %>
       </div>
     </div>
   </div>

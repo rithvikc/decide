@@ -1,25 +1,34 @@
-<% event.invited_users.each do |user| %>
-
-  <% if user.invitation_accepted_at %>
+<% event.invitations.each do |invitation| %>
+  <% if invitation.cancelled? %>
+    <div class="notification mr-4">
+      <div class="marker cancelled">
+        <h3><%= invitation.user.name[0].capitalize %></h3>
+      </div>
+      <div class="notification-content text-break">
+        <p><small><%= invitation.user.name %></small></p>
+      </div>
+    </div>
+  <% else %>
     <div class="notification mr-4">
       <div class="marker">
-        <h3><%= user.name[0].capitalize %></h3>
+        <h3><%= invitation.user.name[0].capitalize %></h3>
       </div>
       <div class="notification-content text-break">
-        <p><small><%= user.name %></small></p>
+        <p><small><%= invitation.user.name %></small></p>
       </div>
     </div>
 
-  <% else %>
-
-    <div class="notification mr-4">
-      <div class="marker avatar-large-pending">
-        <h3><%= user.name[0].capitalize %></h3>
-      </div>
-      <div class="notification-content text-break">
-        <p><small><%= user.name %></small></p>
-      </div>
-    </div>
 
   <% end %>
+<% end %>
+
+<% event.users_pending_invitation.each do |user| %>
+  <div class="notification mr-4">
+    <div class="marker avatar-large-pending">
+      <h3><%= user.name[0].capitalize %></h3>
+    </div>
+    <div class="notification-content text-break">
+      <p><small><%= user.name %></small></p>
+    </div>
+  </div>
 <% end %>

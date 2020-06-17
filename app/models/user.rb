@@ -11,4 +11,10 @@ class User < ApplicationRecord
   def name
     super || email
   end
+
+  def set_status_for(event, status)
+    invitation = Invitation.find_by(event: event, user: self)
+    invitation.status = status
+    invitation.save #update
+  end
 end
