@@ -33,11 +33,11 @@
         <% end %>
         <br>
         <br>
-        <% if @event.decided == false %>
-          <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-light p-2", method: :post %>
-        <% else %>
-          <%= button_to "See the decision!", event_results_path(@event, @even.result), class: "btn btn-block d-btn-light p-2", method: :get %>
+
+        <%= simple_form_for(:result, url:event_results_path(@event)) do |f| %>
+          <%= f.button :submit, value:"Decided!", class: "js-sweetalert btn btn-block d-btn-light p-2"%>
         <% end %>
+
       </div>
     </div>
   </div>
