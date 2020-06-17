@@ -30,19 +30,15 @@ import { initPlaces } from '../plugins/init_gplaces_widget';
 import { initSelect2 } from '../plugins/init_select2';
 
 import { initEventCable } from '../channels/event_channel';
-
+import { initSweetAlert } from '../plugins/init_sweetalert';
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initPlaces();
   initSelect2();
   initEventCable();
-})
-
-$(document).ready(function(){
+  initSweetAlert();
   $(".category-choice").click(function(){
     $(this).toggleClass("active");
   });
-});
-
-
+})
