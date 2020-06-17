@@ -7,7 +7,10 @@
   font-weight:bold;
 }
 .submit{
-  position: absolute;
+  @media (min-width: 768px) {position:relative;}
+  position: fixed;
+  left:0;
+  right:0;
   bottom: 0;
   text-align: center;
   background-color: #181818;
@@ -22,11 +25,18 @@
 
 .form-control{
   border-radius: 0;
+  border-bottom: $d-white solid 2px;
   border-left-style: hidden;
   border-right-style: hidden;
   border-top-style: hidden;
   background-color: transparent;
   padding:0;
+  color:white;
+  width:80%;
+  &::placeholder{
+    color:white;
+  }
+
 }
 
 .form-control:focus{
@@ -42,6 +52,9 @@
     background-color: transparent;
 }
 
+.form-actions{
+  height:50px;
+}
 
 .form-width {
   width: 100%;
@@ -63,4 +76,36 @@
   font-size: normal;
   padding: 5px;
 
+}
+
+// font awesome styling
+.font-icons{
+  .fa-arrow-right{
+    position: absolute;
+  }
+}
+
+.icon-field{
+  position:relative;
+  &:before{
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    content: "\f061";
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+  }
+  .form-control{
+    margin-left:40px !important;
+  }
+  .select2-search__field{
+   margin-left:40px !important;
+
+
+  }
+}
+
+::-webkit-calendar-picker-indicator {
+  color: rgba(255, 255,255, 1);
+  opacity: 1
 }

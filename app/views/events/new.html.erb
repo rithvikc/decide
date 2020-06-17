@@ -11,20 +11,20 @@
 
   <%= simple_form_for(@event) do |f| %>
       <div class="form-inputs">
+      <%= f.input :name, label: "What's happening?" , input_html: {maxlength: 24, size: 40}, placeholder: "Give your event a name", class: "col-xs-6",:label_html => { :class => 'label' }, :wrapper_html => { class: "icon-field"} %>
 
-        <%= f.input :name, label: "What's happening?" , input_html: {maxlength: 24, size: 40}, placeholder: "Give your event a name", class: "col-xs-6",:label_html => { :class => 'label' } %>
+        <%= f.association :cuisine_events, :label => "What food are your friends into?", collection: Cuisine.all, input_html: { multiple: true, data: {:placeholder => '100\'s of cuisines'} }, include_hidden: false, :label_html => { :class => 'label'},:wrapper_html => { class: "icon-field"} %>
 
-        <%= f.association :cuisine_events, :label => "What food are your friends into?", collection: Cuisine.all, input_html: { multiple: true, data: {:placeholder => '100\'s of cuisines'} }, include_hidden: false, :label_html => { :class => 'label'} %>
+        <%= f.input :description, label: "What's the occasion?",input_html: {maxlength: 60, size: 100}, placeholder: "Add a comment for your friends!",:label_html => { :class => 'label' }, :wrapper_html => { class: "icon-field"} %>
 
-        <%= f.input :description, label: "What's the occasion?",input_html: {maxlength: 60, size: 100}, placeholder: "Add a comment for your friends!",:label_html => { :class => 'label' } %>
-        <%= f.input :start_at, label: "When do you want to do this?", as: :datetime, html5: true, input_html: {class: "datepicker"}, class: "form-width", :label_html => { :class => 'label' } %>
+        <%= f.input :start_at, label: "When do you want to do this?", as: :datetime, html5: true, input_html: {class: "datepicker"}, class: "form-width", placeholder: "Add a comment for your friends!", :label_html => { :class => 'label' }, :wrapper_html => { class: "icon-field"} %>
       </div>
 
-  </div>
       <div class="form-actions">
           <%= f.button :submit, "Next", class:"submit" %>
       </div>
-<% end %>
+  <% end %>
+</div>
 
 
 
