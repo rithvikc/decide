@@ -7,4 +7,8 @@ class User < ApplicationRecord
   has_many :events, through: :invitations
 
   attr_accessor :invited_to
+
+  def name
+    super || email
+  end
 end
