@@ -62,7 +62,6 @@ class EventsController < ApplicationController
       event_channel
       flash[:notice] = "Your invitation has been sent!"
     end
-    # redirect_to event_path(@event)
   end
 
   private
