@@ -1,0 +1,73 @@
+.img-squarish {
+    transform: rotate(32.5deg);
+    padding: 25px;
+    border-radius: 30%;
+}
+
+.card-blue {
+  background: #394dcd;
+  padding: 40px;
+  border: 1px solid lightgrey;
+  text-align: center;
+  margin: 20px 0px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+}
+
+.rotate {
+  animation: rotation 8s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+/*img, div {
+  width: 100px;
+  height: 100px;
+}*/
+
+.x {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-animation: x 13s linear infinite alternate;
+          animation: x 13s linear infinite alternate;
+}
+
+.y {
+  height: 150px;
+  border-radius: 50%;
+  -webkit-animation: y 7s linear infinite alternate;
+          animation: y 7s linear infinite alternate;
+
+}
+
+@-webkit-keyframes x {
+  100% {
+    -webkit-transform: translateX(calc(100vw - 100px));
+            transform: translateX(calc(100vw - 100px));
+  }
+}
+
+@keyframes x {
+  100% {
+    -webkit-transform: translateX(calc(100vw - 100px));
+            transform: translateX(calc(100vw - 100px));
+  }
+}
+@-webkit-keyframes y {
+  100% {
+    -webkit-transform: translateY(calc(100vh - 100px));
+            transform: translateY(calc(100vh - 100px));
+  }
+}
+@keyframes y {
+  100% {
+    -webkit-transform: translateY(calc(100vh - 100px));
+            transform: translateY(calc(100vh - 100px));
+  }
+}

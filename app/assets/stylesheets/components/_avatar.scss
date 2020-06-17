@@ -27,7 +27,7 @@
 }
 
 .notification-container {
-  height: 120px;
+  height: 100px;
   overflow: auto;
   overflow-y: hidden;
 }
@@ -46,7 +46,9 @@
   line-height: 44px;
   border: 3px solid white;
   &.cancelled {
-    background: grey;
+    background: #707070;
+    border: 3px solid gray;
+    filter: opacity(0.5);
   }
 
   h3 {
@@ -70,8 +72,6 @@
   // border-radius: 10px;
   // text-align: center;
 }
-
-
 
 .notification .notification-content {
   // padding: 0 0px;
