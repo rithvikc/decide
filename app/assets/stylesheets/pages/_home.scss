@@ -21,6 +21,21 @@ a{
   color: #3b3b3b;
 }
 
+.banner-invitations{
+  margin-top: 0px; // was 20px, Arie added decide logo and changed
+  color: $d-white;
+  font-size: 30px;
+  width: 270px;
+  padding: 7px;
+  transform: rotate(-3deg);
+  background-color: white;
+  color: $bg;
+}
+a{
+  color: #3b3b3b;
+}
+
+
 .mapboxgl-ctrl-logo {
     display: none !important;
 }
@@ -111,20 +126,16 @@ a{
 }
 
 .mobile-frame {
-  // max-width: 500px;
   margin: 0 auto;
   position: relative;
 }
 
 .logo-body {
   height: 30px;
-  // filter: invert(1);
   margin-left: 2px;
 }
 
 .plus-body {
   height: 40px;
-  // filter: invert(1);
-  // margin-left: 2px;
 }
 
