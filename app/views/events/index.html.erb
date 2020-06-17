@@ -1,10 +1,11 @@
-<div class = "card rounded-decide">
-  <div class="card-body">
-  <h1 class = "card-title mb-5">Your events</h1>
+<div class = "container mt-4 event-index">
+  <%= render 'shared/navbar_logo_plus' %>
   <% @user_invitations.each do |i| %>
-    <h3><%= link_to i.event.name, event_path(i.event) %></h3>
-    <p><i class="far fa-comment mr-3"></i><%= i.event.description %></p>
-    <p><i class="fas fa-calendar-day mr-3 mb-3"></i><%= i.event.start_at %></p>
+    <div class="border border-white p-3 rounded-lg mb-4">
+      <h4><%= link_to i.event.name, event_path(i.event), style: "color: white;" %></h4>
+      <p><%= i.event.description %></p>
+      <h6><em>On <%= i.event.start_at.strftime("%A, %b %d") %> at </i><%= i.event.start_at.strftime("%I:%M %P") %></em></h6>
+    </div>
     <% end %>
   </div>
 </div>

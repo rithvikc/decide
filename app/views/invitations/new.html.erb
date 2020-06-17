@@ -1,23 +1,27 @@
-<div class="div-shape-sm ">
+<div class="container mt-4 event-index">
+  <%= render 'shared/navbar_basic' %>
+</div>
+
+<div class="div-shape-sm mb-4">
   <div class="container">
-    <h2 class="mb-2"><%= @event.name %></h2>
+    <h2 class = "banner-invitations">You're invited! 💌</h2>
   </div>
 </div>
 
-<div class="container mt-4">
-  <p><i class="fas fa-calendar-day mr-3" style="color: #083D77;"></i><%= @event.start_at.strftime("%A, %b %d") %></p>
-  <p><i class="far fa-clock mr-3" style="color: #083D77;"></i><%= @event.start_at.strftime("%I:%M %P") %></p>
-  <p class="text-break"><i class="far fa-comment text-break mr-3" style="color: #083D77;"></i><%= @event.description %></p>
+<div class="container">
+  <div class="">
+   <h2 class="mb-2"><strong><%= @event.name %></strong></h2>
+    <h6><em>On <%= @event.start_at.strftime("%A, %b %d") %> at </i><%= @event.start_at.strftime("%I:%M %P") %></em></h6>
+    <p class="text-break"><%= @event.description %></p>
+  </div>
+    <%= simple_form_for [@event, @invitation] do |f| %>
+    <div class="mt-4 form-inputs">
+      <%= f.input :location, input_html: {id:"location"}, placeholder: "Your address" ,  label: "What's your address?"%>
+      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false,  label: "What do you want to eat?",input_html: { data: {:placeholder => 'Choose a cuisine'} } %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, 'Join in', class:'submit'%>
+    </div>
+    <% end %>
 </div>
-
-<%= simple_form_for [@event, @invitation] do |f| %>
-  <div class="container mt-4 form-inputs">
-    <%= f.input :location, input_html: {id:"location"}, placeholder: "Your address" ,  label: "What's your address?"%>
-    <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false,  label: "What do you want to eat?",input_html: { data: {:placeholder => 'Choose a cuisine'} } %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, 'Join in', class:'submit'%>
-  </div>
-
-<% end %>

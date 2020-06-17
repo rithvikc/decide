@@ -62,7 +62,6 @@ class EventsController < ApplicationController
       event_channel
       flash[:notice] = "Your invitation has been sent!"
     end
-    # redirect_to event_path(@event)
   end
 
   private
@@ -99,7 +98,7 @@ class EventsController < ApplicationController
   def event_channel
     EventChannel.broadcast_to(
       @event,
-      render_to_string(partial: "shared/marker", locals: { event: @event })
+      render_to_string(partial: "shared/invited", locals: { event: @event })
     )
   end
 end
