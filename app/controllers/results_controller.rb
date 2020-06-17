@@ -7,8 +7,32 @@ class ResultsController < ApplicationController
   def show
     @result = Result.find(params[:id])
     @event = Event.find(params[:event_id])
+    @restaurant = @result.restaurant
     @event.decided = true
     @event.save!
+    @markers = @event.invitations.map do |i|
+      { lat: i.latitude,
+        lng: i.longitude,
+
+        image_url: helpers.asset_url('map-user-blue.png') }
+    end
+    # @markers << {
+    #   lat: @result.restaurant.latitude,
+    #   lng: @result.restaurant.longitude,
+    #   image_url: helpers.asset_url('marker-star.png')
+
+    #   # infoWindow: render_to_string(partial: "info_window", locals: { restaurant: @restaurant })
+    # }
+
+    @location_info = {
+      lat: @result.restaurant.latitude,
+      lng: @result.restaurant.longitude,
+      image_url: helpers.asset_url('marker-star.png'),
+      name: @result.restaurant.name,
+      ratings: @result.restaurant.ratings,
+      info_window_html: render_to_string(partial: "info_window", locals: { restaurant: @restaurant })
+    }
+    @google_url = "https://maps.google.com/?q=#{@result.restaurant.name} #{@result.restaurant.location}"
   end
 
   def create

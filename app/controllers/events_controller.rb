@@ -95,7 +95,7 @@ class EventsController < ApplicationController
   def event_channel
     EventChannel.broadcast_to(
       @event,
-      render_to_string(partial: "shared/invited", locals: { event: @event })
+      render_to_string(partial: "shared/marker", locals: { event: @event })
     )
   end
 end
