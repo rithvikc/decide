@@ -7,7 +7,6 @@
 </div>
 
 <div class="container">
-
   <%= simple_form_for(@event, html: {class: "mt-4 mb-4"}) do |f| %>
       <div class="form-inputs">
       <%= f.input :name, label: "What's happening?" , input_html: {maxlength: 24, size: 40}, placeholder: "Give your event a name", class: "col-xs-6",:label_html => { :class => 'label' }, :wrapper_html => { class: "icon-field"} %>

@@ -31,6 +31,7 @@ import { initSelect2 } from '../plugins/init_select2';
 
 import { initEventCable } from '../channels/event_channel';
 import { initSweetAlert } from '../plugins/init_sweetalert';
+import { initArrowChange} from '../plugins/init_arrowchange';
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
@@ -38,6 +39,7 @@ document.addEventListener('turbolinks:load', () => {
   initSelect2();
   initEventCable();
   initSweetAlert();
+  initArrowChange();
   $(".category-choice").click(function(){
     $(this).toggleClass("active");
   });

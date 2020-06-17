@@ -88,7 +88,7 @@
 
 .icon-field{
   position:relative;
-  overflow: hidden;
+  // overflow: hidden;
   &:before{
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -97,6 +97,7 @@
     bottom: 4px;
     left: 0;
   }
+
 
   .form-control{
     margin-left:40px !important;
@@ -107,6 +108,9 @@
   .select2-search__field{
    margin-left:40px !important;
   }
-
 }
 
+.icon-field.tick:before{
+  content: "\f00c";
+
+}
