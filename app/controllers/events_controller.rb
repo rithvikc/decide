@@ -53,17 +53,17 @@ class EventsController < ApplicationController
     elsif @user.present? && User.all.include?(@user)
       @user.last_event = @event.id
       @user.invite![email: @user.email, last_event: @event.id]
+      @event.reload
       event_channel
       flash[:notice] = "Your invitation has been sent!"
     else
       User.invite!(email: email_params[:invite][:email].downcase, last_event: @event.id)
+      @event.reload
       event_channel
       flash[:notice] = "Your invitation has been sent!"
     end
     # redirect_to event_path(@event)
   end
-
-
 
   private
 
