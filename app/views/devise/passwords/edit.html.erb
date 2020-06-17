@@ -1,4 +1,5 @@
-<div class="container mt-4">
+<div class="container invitation-container">
+  <%= render 'shared/navbar_basic' %>
   <h2>Change your password</h2>
 
   <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
@@ -21,7 +22,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Change my password", class:'btn btn-block d-btn-dark p-2' %>
+      <%= f.button :submit, "Change my password", class: "button rounded-decide" %>
     </div>
   <% end %>
 
