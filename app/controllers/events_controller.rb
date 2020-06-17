@@ -27,6 +27,8 @@ class EventsController < ApplicationController
 
   def show
     # @invitation = Invitation.new
+    @user = current_user
+    @invitation = @user.invitations.find_by(event:@event)
     if @event.result
       redirect_to event_result_path(@event.result) and return
     else
@@ -51,10 +53,12 @@ class EventsController < ApplicationController
     elsif @user.present? && User.all.include?(@user)
       @user.last_event = @event.id
       @user.invite![email: @user.email, last_event: @event.id]
+      @event.reload
       event_channel
       flash[:notice] = "Your invitation has been sent!"
     else
       User.invite!(email: email_params[:invite][:email].downcase, last_event: @event.id)
+      @event.reload
       event_channel
       flash[:notice] = "Your invitation has been sent!"
     end

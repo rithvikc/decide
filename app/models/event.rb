@@ -13,4 +13,8 @@ class Event < ApplicationRecord
     relation_b = users.to_a
     (relation_a + relation_b).uniq(&:id)
   end
+
+  def users_pending_invitation
+    User.where(last_event: id, invitation_accepted_at: nil)
+  end
 end

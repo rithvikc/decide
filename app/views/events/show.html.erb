@@ -1,14 +1,14 @@
 <div class="mobile-frame row">
   <div class="col-md-6">
     <div class="map-event">
-      <div id="map"
+      <div id="map" style="height: 100vh;"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
     </div>
   </div>
   <div class="event-content col-md-6">
-    <div class="bgc">
+    <div class="bgc-event">
       <div class="container pt-3">
         <%= image_tag("logo-crop.png", class: "logo-body mb-3") %>
         <h2 class="mb-3"><strong><%= @event.name %></strong></h2>
@@ -22,14 +22,20 @@
           <% end %>
         <% end %>
         <h6 class="mb-3"><strong>Who's coming</strong></h6>
-        <div class="d-flex mb-3 notification-container" id="invite-container" data-event-id="<%= @event.id %>">
-            <%= render 'shared/marker', event:@event %>
+        <div class="d-flex notification-container" id="invite-container" data-event-id="<%= @event.id %>">
+            <%= render 'shared/invited', event:@event %>
         </div>
-        <% if @event.decided == false %>
-          <%= button_to "Decide!", event_results_path(@event), class: "btn btn-block d-btn-light p-2", method: :post %>
+
+        <% if @invitation.cancelled? %>
+          <%= link_to "Want to attend?", event_invitations_attendences_path(@event), class: "js-sweetalert btn btn-block d-btn-transparent p-2 mb-3", method: :post %>
         <% else %>
-          <%= button_to "See the decision!", event_results_path(@event, @even.result), class: "btn btn-block d-btn-light p-2", method: :get %>
-      <% end %>
+          <%= link_to "Need to cancel?", event_invitations_attendence_path(@event), class: "js-sweetalert btn btn-block d-btn-transparent p-2 mb-3", method: :delete %>
+        <% end %>
+
+        <%= simple_form_for(:result, url:event_results_path(@event)) do |f| %>
+          <%= f.button :submit, value:"Decide!", class: "js-sweetalert btn btn-block d-btn-light p-2"%>
+        <% end %>
+
       </div>
     </div>
   </div>

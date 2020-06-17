@@ -10,6 +10,8 @@ class InvitationsController < ApplicationController
     @event = Event.find(params[:event_id])
     @invitation = Invitation.new(invitation_params)
     @user = current_user
+    @user.invitation_accepted_at = DateTime.now
+    @user.save!
     @invitation.user = @user
     @invitation.event = @event
     unless @event.invitations.empty? || within_50km?(@invitation, @event)
@@ -18,6 +20,7 @@ class InvitationsController < ApplicationController
     end
     @invitation.status = "Confirmed"
     if @invitation.save
+      @event.reload
       EventChannel.broadcast_to(
         @event,
         render_to_string(partial: "shared/invited", locals: { event: @event })

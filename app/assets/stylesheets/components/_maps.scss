@@ -1,5 +1,14 @@
 .map-event {
-  @media (min-width: 768px) {height: 100%}
+  .mapboxgl-map {
+      height: 300px !important;
+    }
+  @media (min-width: 768px) {
+    height: 100%;
+
+    .mapboxgl-map {
+      height: 100vh !important;
+    }
+  }
   width: 100%;
   height: 315px;
   position: absolute;
@@ -9,9 +18,7 @@
   bottom: 0;
   right: 0;
   filter: brightness(0.9);
-  .mapboxgl-map {
-      height: 100%;
-    }
+
     // .mapboxgl-canvas {
     //   width: 100%;
     //   height: 300px;
@@ -19,7 +26,7 @@
 }
 
 .map-results {
-  @media (min-width: 768px) {height: 100%}
+  @media (min-width: 768px) { height: 100%}
   width: 100%;
   height: 100vh;
   position: absolute;
@@ -38,8 +45,18 @@
     // }
 }
 
+.event-content {
+  @media (min-width: 768px) {padding: 75px 0px 0px 0px;}
+  height: 100vh;
+  width: 100%;
+  padding: 295px 0px 0px 0px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+}
+
 .results-content {
-  @media (min-width: 768px) {padding: 5% 0px 0px 0px;}
+  @media (min-width: 768px) {padding: 75px 0px 0px 0px;}
   height: 100vh;
   width: 100%;
   padding: 450px 0px 0px 0px;
@@ -47,6 +64,21 @@
   position: relative;
   z-index: 10;
 }
+
+.bgc-event {
+  @media (min-width: 768px) {
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
+    height: auto;
+  }
+  height: 100vh;
+  background-color: $d-body;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top: -50px;
+  padding-bottom: 50px;
+  box-shadow: 2px -2px 5px 0px rgba(0, 0, 0, 0.1)
+}
+
 
 .bgc-results {
   @media (min-width: 768px) {
@@ -62,23 +94,8 @@
   box-shadow: 2px -2px 5px 0px rgba(0, 0, 0, 0.1)
 }
 
-.event-content {
-  height: 100vh;
-  width: 100%;
-  padding: 295px 0px 0px 0px;
-  overflow-y: auto;
-  position: relative;
-  z-index: 10;
-}
 
-.bgc {
-  background-color: $d-body;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  margin-top: -50px;
-  margin-bottom: 50px;
-  box-shadow: 2px -2px 5px 0px rgba(0, 0, 0, 0.1)
-}
+// Mapbox styling
 
 .mapboxgl-popup {
   max-width: 200px;
