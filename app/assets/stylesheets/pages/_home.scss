@@ -8,7 +8,7 @@ html, body {
 h2{
 }
 .banner{
-  margin-top: 20px;
+  margin-top: 0px; // was 20px, Arie added decide logo and changed
   color: $d-white;
   font-size: 36px;
   width: 270px;
@@ -75,7 +75,7 @@ a{
   display: inline-block;
   border: 2px solid #fff;
   border-color: $d-white;
-  padding: 10px 20px;
+  padding: 10px 30px;
   color: $d-white;
   text-decoration: none;
   transition: 0.3s;
@@ -84,7 +84,7 @@ a{
 
 .button:hover {
   background: $d-white;
-  color: $d-white;
+  color: $d-body;
 }
 
 .btn-group-vertical a, .btn-group-vertical button {
@@ -121,3 +121,10 @@ a{
   // filter: invert(1);
   margin-left: 2px;
 }
+
+.plus-body {
+  height: 40px;
+  // filter: invert(1);
+  // margin-left: 2px;
+}
+
