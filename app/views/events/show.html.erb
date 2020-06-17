@@ -10,7 +10,7 @@
   <div class="event-content col-md-6">
     <div class="bgc-event">
       <div class="container pt-3">
-        <%= image_tag("logo-crop.png", class: "logo-body mb-3") %>
+        <%= link_to image_tag("logo-crop.png", class: "logo-body mb-3"), "/" %>
         <h2 class="mb-3"><strong><%= @event.name %></strong></h2>
         <h6><em>On <%= @event.start_at.strftime("%A, %b %d") %> at </i><%= @event.start_at.strftime("%I:%M %P") %></em></h6>
         <p class="mb-4"><%= @event.description %></p>
@@ -35,7 +35,6 @@
         <%= simple_form_for(:result, url:event_results_path(@event)) do |f| %>
           <%= f.button :submit, value:"Decide!", class: "js-sweetalert btn btn-block d-btn-light p-2"%>
         <% end %>
-
       </div>
     </div>
   </div>

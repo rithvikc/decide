@@ -2,8 +2,9 @@
   <h1><%= image_tag "logo.png", class: "img-fluid" %></h1>
     <div class="btn-group-vertical mt-4">
     <% if user_signed_in? %>
-      <%= link_to "Create New Event", new_event_path, class: "button rounded-decide" %>
-      <%= link_to "Manage Events", events_path, class: "button rounded-decide" %>
+      <%= link_to "Lets' Party!", new_event_path, class: "button rounded-decide" %>
+      <%= link_to "My Events", events_path, class: "button rounded-decide" %>
+      <%= link_to "Log Out", destroy_user_session_path, class: "button rounded-decide", method: :delete %>
     <br>
     <% else %>
       <%= link_to "SIGN UP", new_user_registration_path, class: "button rounded-decide" %>
