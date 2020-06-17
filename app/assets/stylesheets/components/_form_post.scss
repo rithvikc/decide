@@ -1,5 +1,9 @@
 // Form design
-
+@media (min-width: 768px) {
+  .submit{
+    position:relative;
+  }
+}
 
 // label
 .label{
@@ -32,6 +36,7 @@
   background-color: transparent;
   padding:0;
   color:white;
+  @media (min-width: 768px) {width:100%}
   width:80%;
   &::placeholder{
     color:white;
@@ -83,6 +88,7 @@
 
 .icon-field{
   position:relative;
+  overflow: hidden;
   &:before{
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -91,17 +97,16 @@
     bottom: 4px;
     left: 0;
   }
+
   .form-control{
     margin-left:40px !important;
+    .datepicker{
+      width: 100% !important
+    }
   }
   .select2-search__field{
    margin-left:40px !important;
-
-
   }
+
 }
 
-::-webkit-calendar-picker-indicator {
-  color: rgba(255, 255,255, 1);
-  opacity: 1
-}

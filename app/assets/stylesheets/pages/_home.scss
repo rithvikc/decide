@@ -6,9 +6,16 @@ html, body {
 }
 
 h2{
+}
+.banner{
   margin-top: 20px;
   color: $d-white;
   font-size: 36px;
+  width: 270px;
+  padding: 7px;
+  transform: rotate(-3deg);
+  background-color: white;
+  color: $bg;
 }
 a{
   color: #3b3b3b;
