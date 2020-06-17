@@ -1,3 +1,24 @@
+ <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Are you sure?!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>We'll give you 2 more chances to pick a new restaurant.</p>
+        <p><span style="color: red;">Beware</span>, once you've hit next there's no coming back!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn d-btn-white" data-dismiss="modal">Close</button>
+        <button type="button" class="btn d-btn-red">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="mobile-frame row">
   <div class="col-md-6">
     <div class="map-results">
@@ -24,7 +45,10 @@
         <div class="d-flex notification-container" id="invite-container" data-event-id="<%= @event.id %>">
             <%= render 'shared/invited', event:@event %>
         </div>
-        <%= link_to "Get Directions!", @google_url, target: :_blank, class: "btn btn-block d-btn-light p-2" %>
+        <%= link_to "Get Directions!", @google_url, target: :_blank, class: "btn btn-block d-btn-light p-2 mb-3" %>
+        <button type="button" class="btn btn-block d-btn-red p-2" data-toggle="modal" data-target="#exampleModal">
+            Try Again
+        </button>
       </div>
     </div>
   </div>

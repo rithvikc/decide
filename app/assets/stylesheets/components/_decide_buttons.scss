@@ -39,6 +39,32 @@
     text-decoration: none;
   }
 
+.d-btn-red {
+  font-weight: bolder;
+  color: red;
+  background-color: $d-body-transparent;
+  border-color: $red;
+  border-radius: $border-radius-lg;
+}
+
+.d-btn-red:hover {
+    color: white;
+    background-color: red;
+    text-decoration: none;
+  }
+
+.d-btn-white {
+  font-weight: bolder;
+  color: white;
+  background-color: $d-body-transparent;
+  border-color: $d-white;
+  border-radius: $border-radius-lg;
+}
+
+.d-btn-red:hover {
+    color: $d-body;
+    text-decoration: none;
+  }
 
 .email-input-form {
   border-top-left-radius: 10px !important;
@@ -63,4 +89,15 @@
   border-bottom-left-radius: 0px !important;
 }
 
+.modal-content {
+  background: $d-body;
+}
 
+.modal-header {
+  border: none;
+}
+
+.modal-footer {
+  border: none;
+  justify-content: space-evenly;
+  }
