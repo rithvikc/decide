@@ -8,13 +8,14 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # resources :cuisine_events, only: [:new, :create]
   get 'kitchensink', to: 'pages#kitchensink'
-  
-  resources :events, only: [] do 
+  get 'test', to: 'pages#test'
+
+  resources :events, only: [] do
     namespace :invitations do
       resources :attendences, only: [:create, :destroy]
     end
   end
-   
+
 
   resources :restaurants, only: :create
   resources :events, only: [:new, :create, :show, :index] do
