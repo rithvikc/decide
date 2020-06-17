@@ -28,6 +28,8 @@ class EventsController < ApplicationController
 
   def show
     # @invitation = Invitation.new
+    @user = current_user
+    @invitation = @user.invitations.find_by(event:@event)
     if @event.result
       redirect_to event_result_path(@event.result) and return
     else
@@ -61,6 +63,8 @@ class EventsController < ApplicationController
     end
     # redirect_to event_path(@event)
   end
+
+
 
   private
 
