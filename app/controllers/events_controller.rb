@@ -14,11 +14,14 @@ class EventsController < ApplicationController
   end
 
   def create
+    unless event_params[:cuisine_event_ids].present?
+      flash[:alert] = "Please pick a type of food!"
+      redirect_to new_event_path and return
+    end
     @event = Event.new(event_params.except(:cuisine_event_ids))
     @event.decided = false
-    if @event.save!
+    if @event.save
       cuisine_event_params(event_params)
-    # @save_count == event_params[:cuisine_event_ids].count
       redirect_to new_event_invitation_path(@event)
     else
       render :new
