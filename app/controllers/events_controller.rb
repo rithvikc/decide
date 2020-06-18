@@ -36,6 +36,7 @@ class EventsController < ApplicationController
         {
           lat: i.latitude,
           lng: i.longitude,
+          infoWindow: i.user.email[0].capitalize,
           # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
           image_url: helpers.asset_url('map-user-blue.png')
         }

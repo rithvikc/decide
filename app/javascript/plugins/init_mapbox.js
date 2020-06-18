@@ -41,11 +41,12 @@ const initMapbox = () => {
 
     markers.forEach((marker, index) => {
       const element = document.createElement('div');
-      element.className = 'marker';
-      element.style.backgroundImage = `url('${marker.image_url}')`;
+    element.className = 'marker-mb';
+      // element.style.backgroundImage = `url('${marker.image_url}')`;
       element.style.backgroundSize = 'contain';
       element.style.width = '25px';
       element.style.height = '25px';
+      element.innerHTML = `${marker.infoWindow}`;
 
       new mapboxgl.Marker(element)
         .setLngLat([ marker.lng, marker.lat ])
