@@ -56,6 +56,7 @@ class EventsController < ApplicationController
       @event.reload
       event_channel
     end
+    redirect_to event_path(@event)
   end
 
   private

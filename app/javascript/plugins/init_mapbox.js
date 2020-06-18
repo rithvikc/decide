@@ -20,13 +20,21 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const markers = JSON.parse(mapElement.dataset.markers);
     var last_element = markers[markers.length - 1];
-    const map = new mapboxgl.Map({
+
+    if (last_element) { var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/rithvik/ck9xrhxz91pgp1inyh8u8z8d1',
       attributionControl: false,
       center: [last_element.lng, last_element.lat]
-    });
-
+      });
+    } else {
+      var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/rithvik/ck9xrhxz91pgp1inyh8u8z8d1',
+      attributionControl: false,
+      center: [144.9913,-37.8238]
+      });
+    };
     map.on("load", () => {
       map.resize()
     })
