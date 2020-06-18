@@ -28,6 +28,19 @@ password = "123456"
 end
 p "success!"
 
+# Create cuisines
+array_num = 0
+cuisines_array = ["African", "Asian", "BBQ", "Bakery", "Bangladeshi", "Korean", "Burgers", "Cafe", "Chinese", "Crepes", "Desserts", "Ethiopian", "Buffet", "Fish and Chips", "French", "Frozen Yogurt", "Ice Cream", "Lebanese", "Indian", "Indonesian", "Iranian", "Italian", "Japanese", "Kebab", "Korean BBQ", "Malaysian", "Mexican", "Middle-Eastern", "Modern Australian", "Pizza", "Portugese", "Pakistani", "Ramen", "Salad", "Sri Lankan", "Sushi", "Thai", "Turkish", "Vegan", "Vegetarian", "Vietnamese"]
+cuisines_len = cuisines_array.length.to_i
+p "creating #{cuisines_len} cuisines!"
+
+until array_num == cuisines_len
+  new_cuisine = Cuisine.new(name: cuisines_array[array_num])
+  new_cuisine.save!
+  array_num += 1
+end
+p "success!"
+
 # Create events
 p "creating 4 events!"
 array_num = 0
@@ -47,30 +60,23 @@ event_time = 1000000000
 end
 p "success!"
 
-# Create cuisines
+# Cuisene events
+p "creating 4 cuisine events!"
 array_num = 0
-cuisines_array = ["Afghan", "African", "Asian", "BBQ", "Bakery", "Bangladeshi", "British", "Burgers", "Cafe", "Chinese", "Crepes", "Desserts", "Ethiopian", "Fish and Chips", "French", "Frozen Yogurt", "Ice Cream", "Indian", "Indonesian", "Iranian", "Italian", "Japanese", "Kebab", "Korean BBQ", "Malaysian", "Mexican", "Middle-Eastern", "Modern Australian", "Pizza", "Portugese", "Pakistani", "Pacific" "Ramen", "Salad", "Sri Lankan", "Sushi", "Thai", "Turkish", "Vegan", "Vegetarian", "Vietnamese"]
-cuisines_len = cuisines_array.length.to_i
-p "creating #{cuisines_len} cuisines!"
-
-until array_num == cuisines_len
-  new_cuisine = Cuisine.new(name: cuisines_array[array_num])
-  new_cuisine.save!
-  array_num += 1
+event_id = 1
+cuisine_arr = [3, 5, 7]
+4.times do
+  3.times do
+    new_cuisine_event = CuisineEvent.new
+    new_cuisine_event.event_id = event_id
+    new_cuisine_event.cuisine_id = cuisine_arr[array_num]
+    new_cuisine_event.save!
+    array_num += 1
+  end
+  array_num = 0
+  event_id += 1
 end
 p "success!"
-
-# Cuisene events
-# p "creating 4 cuisine events!"
-# array_num = 1
-# 4.times do
-#   new_cuisine_event = CuisineEvent.new
-#   new_cuisine_event.event = Event.find(array_num)
-#   new_cuisine_event.cuisine = Cuisine.find(array_num)
-#   new_cuisine_event.save!
-#   array_num += 1
-# end
-# p "success!"
 
 # Create invitations
 p "creating 4 invitations per user"
