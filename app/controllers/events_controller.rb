@@ -39,6 +39,7 @@ class EventsController < ApplicationController
           # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
           image_url: helpers.asset_url('map-user-blue.png')
         }
+
       end
     end
   end
