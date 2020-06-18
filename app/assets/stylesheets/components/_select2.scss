@@ -12,6 +12,7 @@
 }
 
 .select2-container--default .select2-search--inline .select2-search__field{
+  padding-bottom: 2px;
   border-bottom: $d-white solid 2px;
   @media (min-width: 768px) {width: 100% !important}
   width:100% !important;
