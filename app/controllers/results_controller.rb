@@ -7,7 +7,6 @@ class ResultsController < ApplicationController
   def show
     @event = Event.find(params[:event_id])
     @result = @event.result
-    @restaurant = @event.result.restaurant
     @event.decided = true
     @event.save!
     @markers = @event.invitations.map do |i|
@@ -38,9 +37,15 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     @event = Event.find(params[:event_id])
+    if @event.invitations.any? { |h| h[:status] == "Confirmed" }
+      geo_center = find_geo_center(@event)
+    else
+      flash[:notice] = "No one is invited to your event!"
+      redirect_to event_path(@event) and return
+    end
     @event.decided = true
     start_at = @event.start_at.to_i
-    geo_center = find_geo_center(@event)
+
     lat = geo_center[:latitude]
     long = geo_center[:longitude]
     # unix_start_at_with_timezone = set_timezone(lat, long, start_at)
@@ -82,7 +87,7 @@ class ResultsController < ApplicationController
     # accept an an array of hashes of user co-ordinates and return the geographical center
     coords_array = []
     event.invitations.each do |i|
-      coords_array << { latitude: i.latitude, longitude: i.longitude }
+      coords_array << { latitude: i.latitude, longitude: i.longitude } if i.status == 'Confirmed'
     end
     average_geo_location(coords_array)
   end
