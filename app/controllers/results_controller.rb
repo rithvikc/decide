@@ -7,13 +7,11 @@ class ResultsController < ApplicationController
   def show
     @event = Event.find(params[:event_id])
     @result = @event.result
-    @restaurant = @event.result.restaurant
     @event.decided = true
     @event.save!
     @markers = @event.invitations.map do |i|
       { lat: i.latitude,
         lng: i.longitude,
-
         image_url: helpers.asset_url('map-user-blue.png') }
     end
     # @markers << {
@@ -30,7 +28,7 @@ class ResultsController < ApplicationController
       image_url: helpers.asset_url('marker-star.png'),
       name: @result.restaurant.name,
       ratings: @result.restaurant.ratings,
-      info_window_html: render_to_string(partial: "info_window", locals: { restaurant: @restaurant })
+      info_window_html: render_to_string(partial: "info_window", locals: { restaurant: @result.restaurant })
     }
     @google_url = "https://maps.google.com/?q=#{@result.restaurant.name} #{@result.restaurant.location}"
   end
@@ -38,22 +36,29 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(result_params)
     @event = Event.find(params[:event_id])
-    @event.decided = true
-    start_at = @event.start_at.to_i
-    geo_center = find_geo_center(@event)
-    lat = geo_center[:latitude]
-    long = geo_center[:longitude]
+    if @event.invitations.any? { |h| h[:status] == "Confirmed" }
+      geo_center = find_geo_center(@event)
+    else
+      flash[:notice] = "No one is invited to your event!"
+      redirect_to event_path(@event) and return
+    end
+    # start_at = @event.start_at.to_i
     # unix_start_at_with_timezone = set_timezone(lat, long, start_at)
     top_cuisine = find_top_cuisine(@event)
-    yelp_results(lat, long, top_cuisine)
-    @restaurant = Restaurant.last
-    @result.restaurant = @restaurant
+    lat = geo_center[:latitude]
+    long = geo_center[:longitude]
+    unless yelp_results(lat, long, top_cuisine)
+      flash[:notice] = "Sorry, we couldn't find any results near your location!"
+      redirect_to event_path(@event) and return
+    end
+    @result.restaurant = @new_restaurant
     @result.event = @event
     if @result.save
+      @event.decided = true
       redirect_to event_result_path(@event, @result)
     else
-      redirect_to event_path(@event)
       flash[:notice] = "Sorry, we're too busy right now. Please try again!"
+      redirect_to event_path(@event) and return
     end
   end
 
@@ -82,7 +87,7 @@ class ResultsController < ApplicationController
     # accept an an array of hashes of user co-ordinates and return the geographical center
     coords_array = []
     event.invitations.each do |i|
-      coords_array << { latitude: i.latitude, longitude: i.longitude }
+      coords_array << { latitude: i.latitude, longitude: i.longitude } if i.status == 'Confirmed'
     end
     average_geo_location(coords_array)
   end
@@ -146,9 +151,13 @@ class ResultsController < ApplicationController
     request = Net::HTTP::Get.new(url)
     request["user-key"] = ENV["ZOMATO_KEY"]
     response = https.request(request)
-    zomato_json = JSON.parse(response.read_body)["restaurants"]
-    sort_zomato_results(zomato_json, radius, lat, long)
-    create_restaurant_zomato(zomato_json)
+    if response.kind_of? Net::HTTPSuccess
+      zomato_json = JSON.parse(response.read_body)["restaurants"]
+      sort_zomato_results(zomato_json, radius, lat, long)
+      create_restaurant_zomato(zomato_json)
+    else
+      return false
+    end
   end
 
   def sort_zomato_results(json, radius, lat, long)
@@ -164,7 +173,7 @@ class ResultsController < ApplicationController
   end
 
   def create_restaurant_yelp(hash)
-    new_restaurant = Restaurant.new(
+    @new_restaurant = Restaurant.new(
       # yelp_id: hash["url"],
       name: hash["name"],
       description: hash["categories"][0]["title"],
@@ -176,12 +185,12 @@ class ResultsController < ApplicationController
       latitude: hash["coordinates"]["latitude"],
       longitude: hash["coordinates"]["longitude"]
     )
-    new_restaurant.save!
+    @new_restaurant.save!
   end
 
   def create_restaurant_zomato(hash)
     first_result = hash.first
-    new_restaurant = Restaurant.new(
+    @new_restaurant = Restaurant.new(
       # yelp_id: first_result["restaurant"]["url"],
       name: first_result["restaurant"]["name"],
       description: first_result["restaurant"]["cuisines"],
@@ -192,7 +201,7 @@ class ResultsController < ApplicationController
       latitude: first_result["restaurant"]["location"]["latitude"],
       longitude: first_result["restaurant"]["location"]["longitude"]
     )
-    new_restaurant.save!
+    @new_restaurant.save!
   end
 
   private
