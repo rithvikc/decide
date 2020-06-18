@@ -81,7 +81,7 @@ users = User.all
 users.each do |user|
   4.times do
     new_invitation = Invitation.new(
-      status: ["Pending", "Confirmed", "Declined"].sample,
+      status: "Confirmed",
       location: location_array[var]
       )
     new_invitation.user = User.find(user.id)

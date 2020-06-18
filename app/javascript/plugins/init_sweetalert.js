@@ -9,7 +9,7 @@ const initSweetAlert = () => {
       const form = event.currentTarget.form
       Swal.fire({
         icon: 'success',
-        title: 'Deciding!',
+        title: 'We are thinking hard for you...',
         html: 'Narrowing down <b></b> restaurants.',
         timer: 2000,
         timerProgressBar: true,

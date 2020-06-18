@@ -82,7 +82,7 @@ class ResultsController < ApplicationController
     # accept an an array of hashes of user co-ordinates and return the geographical center
     coords_array = []
     event.invitations.each do |i|
-      coords_array << { latitude: i.latitude, longitude: i.longitude }
+      coords_array << { latitude: i.latitude, longitude: i.longitude } if i.status == 'Confirmed'
     end
     average_geo_location(coords_array)
   end
