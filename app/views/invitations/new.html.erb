@@ -14,8 +14,8 @@
 
     <%= simple_form_for [@event, @invitation] do |f| %>
     <div class="mt-4 form-inputs">
-      <%= f.input :location, input_html: {id:"location"}, placeholder: "Your address" , :label_html => { :class => 'label'}, label: "What's your address?", required: true,:wrapper_html => { class: "icon-field"} %>
-      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false, :label_html => { :class => 'label'}, label: "What do you want to eat?",input_html: { data: {:placeholder => 'Choose a cuisine'} }, required: true, :wrapper_html => { class: "icon-field"} %>
+      <%= f.input :location, input_html: {id:"location"}, placeholder: "Your address" , :label_html => { :class => 'label'}, label: "What's your address?", required: true,:wrapper_html => { class: "icon-field mb-4"} %>
+      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false, :label_html => { :class => 'label'}, label: "What do you want to eat?",input_html: { data: {:placeholder => 'Choose a cuisine'} }, required: true, :wrapper_html => { class: "icon-field mb-4"} %>
     </div>
 
     <div class="form-actions">
