@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     # @invitation = Invitation.new
     @user = current_user
     @invitation = @user.invitations.find_by(event:@event)
-    if @event.result
+    if @event.decided
       redirect_to event_result_path(@event.result) and return
     else
       @markers = @event.invitations.map do |i|
