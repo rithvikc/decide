@@ -36,10 +36,10 @@ import { initArrowChange} from '../plugins/init_arrowchange';
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initPlaces();
-  initSelect2();
   initEventCable();
   initSweetAlert();
   initArrowChange();
+  initSelect2();
   $(".category-choice").click(function(){
     $(this).toggleClass("active");
   });

@@ -4,7 +4,8 @@ const initSelect2 = () => {
     selectEls.forEach((selectEl) =>{
       window.jQuery(selectEl).select2({
         width: '100%',
-        placeholder: selectEl.dataset.placeholder
+        placeholder: selectEl.dataset.placeholder,
+        maximumSelectionLength: 3
       });
     })
   }

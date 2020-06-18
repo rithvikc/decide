@@ -37,7 +37,7 @@
   padding:0;
   color:white;
   @media (min-width: 768px) {width:100%}
-  width:80%;
+  // width:80%;
   &::placeholder{
     color:white;
   }
@@ -88,7 +88,7 @@
 
 .icon-field{
   position:relative;
-  // overflow: hidden;
+  width: calc(100% - 40px);
   &:before{
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -110,7 +110,17 @@
   }
 }
 
-.icon-field.tick:before{
+.icon-field-complete:before{
   content: "\f00c";
-
 }
+
+.form-group.event_start_at.icon-field{
+  width: 100%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+     -webkit-box-shadow: 0 0 0 50px #62dea8 inset !important;
+   }
