@@ -1,4 +1,11 @@
 import consumer from "./consumer";
+
+const cleanInputBox = () => {
+  console.log('cleanInputBox');
+  const emailInputForm = document.querySelector('.email-input-form');
+  emailInputForm.value = '';
+}
+
 const initEventCable = () => {
   console.log('eventCable');
   const invitesContainer = document.getElementById('invite-container');
@@ -11,6 +18,9 @@ const initEventCable = () => {
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
           Your invitation has been sent!
         </div>`);
+        
+        cleanInputBox();
+
       },
     });
   }
