@@ -144,7 +144,7 @@ class ResultsController < ApplicationController
 
   def zomato_api_call(lat, long, food)
     radius = 2000
-    url = URI("https://developers.zomato.com/api/v2.1/search?lat=#{lat}&lon=#{long}&radius=#{radius}&cuisines=#{food}&sort=real_distance&order=desc")
+    url = URI("https://developers.zomato.com/api/v2.1/search?lat=#{lat}&lon=#{long}&radius=#{radius}&q=#{food}&sort=real_distance&order=desc")
     https = Net::HTTP.new(url.host, url.port)
     https.use_ssl = true
     request = Net::HTTP::Get.new(url)
