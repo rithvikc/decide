@@ -34,12 +34,7 @@
         <% else %>
           <%= link_to "Can't come?", event_invitations_attendence_path(@event), class: "btn btn-block d-btn-transparent p-2 mt-3", method: :delete %>
         <% end %>
-
       </div>
     </div>
   </div>
 </div>
-<script>document.querySelector('.simple_form.invite').addEventListener('submit', function(e) {
-    e.target.querySelector('.email-input-form').value = '';
-});</script>
-
