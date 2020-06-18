@@ -21,7 +21,6 @@ class ResultsController < ApplicationController
 
     #   # infoWindow: render_to_string(partial: "info_window", locals: { restaurant: @restaurant })
     # }
-
     @location_info = {
       lat: @result.restaurant.latitude,
       lng: @result.restaurant.longitude,
