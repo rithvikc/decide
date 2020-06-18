@@ -1,5 +1,11 @@
 import consumer from "./consumer";
 
+const cleanInputBox = () => {
+  console.log('cleanInputBox');
+  const emailInputForm = document.querySelector('.email-input-form');
+  emailInputForm.value = '';
+}
+
 const initEventCable = () => {
   console.log('eventCable');
   const invitesContainer = document.getElementById('invite-container');
@@ -9,6 +15,7 @@ const initEventCable = () => {
       received(data) {
         console.log("updated");
         invitesContainer.innerHTML = data // called when data is broadcast in the cable
+        cleanInputBox();
       },
     });
   }
