@@ -48,6 +48,9 @@ class InvitationsController < ApplicationController
   def within_50km?(invitation, event)
     coords_array = []
     result = Geocoder.search(invitation.location)
+    unless result.present?
+      return false
+    end
     result_coords = result.first.coordinates
     event.invitations.each do |i|
       coords_array << [i.latitude, i.longitude]
