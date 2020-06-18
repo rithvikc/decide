@@ -29,10 +29,10 @@ class EventsController < ApplicationController
     # @invitation = Invitation.new
     @user = current_user
     @invitation = @user.invitations.find_by(event:@event)
-    if @event.decided
-      redirect_to event_result_path(@event.result) and return
+    if @event.result
+      redirect_to event_result_path(@event, @event.result) and return
     else
-      @markers = @event.invitations.map do |i|
+      @markers = @event.invitations.where(status:"Confirmed").map do |i|
         {
           lat: i.latitude,
           lng: i.longitude,
