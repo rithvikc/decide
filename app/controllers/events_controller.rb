@@ -26,7 +26,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    puts "--> show"
     # @invitation = Invitation.new
     @user = current_user
     @invitation = @user.invitations.find_by(event:@event)
@@ -48,11 +47,11 @@ class EventsController < ApplicationController
     @user = User.find_by({ email: email_params[:invite][:email].downcase })
     @event = Event.find(params[:event_id])
     if @user.present? && @user.email == current_user.email.downcase
-      flash[:notice] = "You're already attending this event"
+      flash[:alert] = "You're already attending this event"
     elsif @event.users.include?(@user) || @event.users_pending_invitation.include?(@user)
-      flash[:notice] = "You've already invited #{@user.email}"
+      flash[:alert] = "You've already invited #{@user.email}"
     else
-      flash[:notice] = "Your invitation has been sent!"
+      flash[:alert] = "Your invitation has been sent!"
       User.invite!(email: email_params[:invite][:email].downcase, last_event: @event.id)
       @event.reload
       event_channel
