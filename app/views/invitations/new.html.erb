@@ -16,8 +16,8 @@
   </div>
     <%= simple_form_for [@event, @invitation] do |f| %>
     <div class="mt-4 form-inputs">
-      <%= f.input :location, input_html: {id:"location"}, placeholder: "Your address" ,  label: "What's your address?"%>
-      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false,  label: "What do you want to eat?",input_html: { data: {:placeholder => 'Choose a cuisine'} } %>
+      <%= f.input :location, input_html: {id:"location"}, placeholder: "Your address" ,  label: "What's your address?", required: true %>
+      <%= f.input :cuisine_id, as: :select, collection: @event.cuisines, include_hidden: false,  label: "What do you want to eat?",input_html: { data: {:placeholder => 'Choose a cuisine'} }, required: true %>
     </div>
 
     <div class="form-actions">
