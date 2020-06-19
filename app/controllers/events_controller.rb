@@ -54,6 +54,11 @@ class EventsController < ApplicationController
       flash[:alert] = "You're already attending this event"
     elsif @event.users.include?(@user) || @event.users_pending_invitation.include?(@user)
       flash[:alert] = "You've already invited #{@user.email}"
+    elsif @user.present?
+      @user.last_event = @event.id
+      @user.invite!
+      flash[:alert] = "Your invitation has been sent!!!"
+      event_channel
     else
       flash[:alert] = "Your invitation has been sent!"
       User.invite!(email: email_params[:invite][:email].downcase, last_event: @event.id)
