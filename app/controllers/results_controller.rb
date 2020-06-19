@@ -59,9 +59,9 @@ class ResultsController < ApplicationController
     if @result.save
       @event.decided = true
       redirect_to event_result_path(@event, @result)
-      @result.event.invitations.each do |i|
-        ResultMailer.with(result: @result, email: i.user.email).new_result_mail.deliver_now
-      end
+      # @result.event.invitations.each do |i|
+      #   ResultMailer.with(result: @result, email: i.user.email).new_result_mail.deliver_now
+      # end
     else
       flash[:notice] = "Sorry, we're too busy right now. Please try again!"
       redirect_to event_path(@event) and return
