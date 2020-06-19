@@ -9,11 +9,14 @@ class ResultsController < ApplicationController
     @result = @event.result
     @event.decided = true
     @event.save!
-    @markers = @event.invitations.map do |i|
-      { lat: i.latitude,
+    @markers = @event.invitations.where(status:"Confirmed").map do |i|
+      {
+        lat: i.latitude,
         lng: i.longitude,
         infoWindow: i.user.email[0].capitalize,
-        image_url: helpers.asset_url('map-user-blue.png') }
+        # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
+        image_url: helpers.asset_url('map-user-blue.png')
+      }
     end
     # @markers << {
     #   lat: @result.restaurant.latitude,
