@@ -5,6 +5,10 @@
   }
 }
 
+.invalid-feedback {
+  margin-left: 40px;
+}
+
 // label
 .label{
   font-size:22px;
@@ -117,11 +121,24 @@
 
 .form-group.event_start_at.icon-field{
   width: 100%;
+  margin-bottom: 64px;
+}
+.bot-marg{
+ margin-bottom: 64px;
+
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
-     -webkit-box-shadow: 0 0 0 50px #62dea8 inset !important;
+     -webkit-box-shadow: 0 0 0 50px #3CA275 inset !important;
    }
+
+#invite_email:-webkit-autofill,
+#invite_email:-webkit-autofill:hover,
+#invite_email:-webkit-autofill:focus,
+#invite_email:-webkit-autofill:active  {
+     -webkit-box-shadow: 0 0 0 50px #ffffff inset !important;
+   }
+

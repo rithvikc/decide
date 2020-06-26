@@ -1,0 +1,5 @@
+meta_product_name: "Decide"
+meta_title: "Decide | Cure Decision Fatigue"
+meta_description: "Change the way you make decisions with decide"
+meta_image: "cover.png" # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account"   # required for Twitter Cards

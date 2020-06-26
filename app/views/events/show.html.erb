@@ -18,7 +18,7 @@
         <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
           <%= f.input :email, label: false, wrapper_html: {class: "d-flex justify-content-between"} do %>
             <%= f.input_field :email, as: :email, placeholder: "  Friend's email address", class: "email-input-form" %>
-            <%= f.button :submit, '+', class: "email-input-btn", label_html: { class: 'input-group-append'} %>
+            <%= f.button :submit, '+',id: "js-friend-email-btn" ,class: "email-input-btn", label_html: { class: 'input-group-append'} %>
           <% end %>
         <% end %>
         <h6 class="mb-3"><strong>Who's coming</strong></h6>
@@ -34,9 +34,7 @@
         <% else %>
           <%= link_to "Can't come?", event_invitations_attendence_path(@event), class: "btn btn-block d-btn-transparent p-2 mt-3", method: :delete %>
         <% end %>
-
       </div>
     </div>
   </div>
 </div>
-

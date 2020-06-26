@@ -9,10 +9,14 @@ class ResultsController < ApplicationController
     @result = @event.result
     @event.decided = true
     @event.save!
-    @markers = @event.invitations.map do |i|
-      { lat: i.latitude,
+    @markers = @event.invitations.where(status:"Confirmed").map do |i|
+      {
+        lat: i.latitude,
         lng: i.longitude,
-        image_url: helpers.asset_url('map-user-blue.png') }
+        infoWindow: i.user.email[0].capitalize,
+        # infoWindow: render_to_string(partial: "infowindow", locals: { flat: flat }),
+        image_url: helpers.asset_url('map-user-blue.png')
+      }
     end
     # @markers << {
     #   lat: @result.restaurant.latitude,
@@ -55,6 +59,9 @@ class ResultsController < ApplicationController
     if @result.save
       @event.decided = true
       redirect_to event_result_path(@event, @result)
+      # @result.event.invitations.each do |i|
+      #   ResultMailer.with(result: @result, email: i.user.email).new_result_mail.deliver_now
+      # end
     else
       flash[:notice] = "Sorry, we're too busy right now. Please try again!"
       redirect_to event_path(@event) and return

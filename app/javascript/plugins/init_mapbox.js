@@ -20,24 +20,33 @@ const initMapbox = () => {
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const markers = JSON.parse(mapElement.dataset.markers);
     var last_element = markers[markers.length - 1];
-    const map = new mapboxgl.Map({
+
+    if (last_element) { var map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/rithvik/ck9xrhxz91pgp1inyh8u8z8d1',
       attributionControl: false,
       center: [last_element.lng, last_element.lat]
-    });
-
+      });
+    } else {
+      var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/rithvik/ck9xrhxz91pgp1inyh8u8z8d1',
+      attributionControl: false,
+      center: [144.9913,-37.8238]
+      });
+    };
     map.on("load", () => {
       map.resize()
     })
 
     markers.forEach((marker, index) => {
       const element = document.createElement('div');
-      element.className = 'marker';
-      element.style.backgroundImage = `url('${marker.image_url}')`;
+    element.className = 'marker-mb';
+      // element.style.backgroundImage = `url('${marker.image_url}')`;
       element.style.backgroundSize = 'contain';
       element.style.width = '25px';
       element.style.height = '25px';
+      element.innerHTML = `${marker.infoWindow}`;
 
       new mapboxgl.Marker(element)
         .setLngLat([ marker.lng, marker.lat ])

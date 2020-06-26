@@ -57,6 +57,16 @@
   }
 }
 
+.marker-mb {
+  width: 50px;
+  height: 50px;
+  background: orange;
+  border-radius: 50%;
+  font-weight: bolder;
+  border: 3px solid white;
+  text-align: center
+}
+
 .notification {
   padding: 0px, 25px, 25px, 25px;
   // background-color: $d-white;
