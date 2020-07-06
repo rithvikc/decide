@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { invitations: 'users/invitations' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  get 'home/index'
+  # devise_for :users, controllers: { invitations: 'users/invitations' }
 
-  root to: 'pages#home'
+  authenticated :user do
+    root 'dashboards#show', as: 'authenticated_root'
+  end
+  devise_scope :user do
+    root 'pages#home'
+  end
 
   resource :dashboard, only: [:show]
 
