@@ -26,6 +26,10 @@ gem 'redis', '~> 4.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
+# User Authentication with Facebook
+gem 'omniauth-facebook'
+# Development ENV Variables
+gem 'figaro'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -35,7 +39,6 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'geocoder'
 gem 'cloudinary', '~> 1.12.0'
-gem 'devise_invitable', '~> 2.0.0'
 gem 'letter_opener', group: :development
 
 group :development, :test do
