@@ -2,7 +2,7 @@
   <%= render 'shared/navbar_logo_plus' %>
   <% @user_invitations.each do |i| %>
     <div class="border border-white p-3 rounded-lg mb-4">
-      <h4><%= link_to i.event.name, event_path(i), style: "color: white;" %></h4>
+      <h4><%= link_to i.event.name, event_path(i.event.id), style: "color: white;" %></h4>
       <p><%= i.event.description %></p>
       <h6><em>On <%= i.event.start_at.strftime("%A, %b %d") %> at </i><%= i.event.start_at.strftime("%I:%M %P") %></em></h6>
     </div>
