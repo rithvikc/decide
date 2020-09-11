@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
 
-
+  # resources :events, param: :hash_token, only: [:new, :create, :show, :index] do
   resources :restaurants, only: :create
   resources :events, only: [:new, :create, :show, :index] do
     resources :mass_invitations, only: [:create]

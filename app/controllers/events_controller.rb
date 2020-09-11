@@ -50,6 +50,7 @@ class EventsController < ApplicationController
   def invite
     @user = User.find_by({ email: email_params[:invite][:email].downcase })
     @event = Event.find(params[:event_id])
+    raise
     if @user.present? && @user.email == current_user.email.downcase
       flash[:alert] = "You're already attending this event"
     elsif @event.users.include?(@user) || @event.users_pending_invitation.include?(@user)

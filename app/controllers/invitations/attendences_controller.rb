@@ -1,13 +1,13 @@
 class Invitations::AttendencesController < ApplicationController
   def destroy
-    @event = Event.find(params[:event_id])
+    @event = Event.find(params[:id])
     current_user.set_status_for(@event, "Declined")
     event_channel
     redirect_to event_path(@event)
   end
 
   def create
-    @event = Event.find(params[:event_id])
+    @event = Event.find(params[:id])
     current_user.set_status_for(@event, "Confirmed")
     event_channel
     redirect_to event_path(@event)

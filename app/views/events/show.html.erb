@@ -15,6 +15,7 @@
         <h6><em>On <%= @event.start_at.strftime("%A, %b %d") %> at </i><%= @event.start_at.strftime("%I:%M %P") %></em></h6>
         <p class="mb-4"><%= @event.description %></p>
         <h6 class="mb-3"><strong>Invite friends</strong></h6>
+        <h6>INVITE LINK</h6>
         <%= simple_form_for(:invite, url: event_invite_path(@event), method: :post, remote: true) do |f| %>
           <%= f.input :email, label: false, wrapper_html: {class: "d-flex justify-content-between"} do %>
             <%= f.input_field :email, as: :email, placeholder: "  Friend's email address", class: "email-input-form" %>
@@ -30,9 +31,9 @@
           <%= f.button :submit, value:"Decide!", class: "js-sweetalert btn btn-block d-btn-light p-2"%>
         <% end %>
         <% if @invitation.cancelled? %>
-          <%= link_to "Want to attend?", event_invitations_attendences_path(@event), class: "btn btn-block d-btn-transparent p-2 mt-3", method: :post %>
+          <%= link_to "Want to attend?", event_invitations_attendences_path(@event.id), class: "btn btn-block d-btn-transparent p-2 mt-3", method: :post %>
         <% else %>
-          <%= link_to "Can't come?", event_invitations_attendence_path(@event), class: "btn btn-block d-btn-transparent p-2 mt-3", method: :delete %>
+          <%= link_to "Can't come?", event_invitations_attendence_path(@event.id), class: "btn btn-block d-btn-transparent p-2 mt-3", method: :delete %>
         <% end %>
       </div>
     </div>
